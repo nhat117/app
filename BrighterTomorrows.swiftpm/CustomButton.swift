@@ -1,44 +1,27 @@
 import SwiftUI
-//Custom color button 
+
 struct CustomButton: View {
-    var letter: String
-    var number: String
-    var action: () -> Void
-    var gradientColors: [Color]
-
     var body: some View {
-        Button(action: action) {
-            HStack {
-                Text(letter)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .padding(.leading)
-                    .font(.system(size: 30))
-
-                Spacer()
-
-                Text(number)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .padding(.trailing)
-                    .font(.system(size: 25))
-            }
-            .frame(width: 350, height: 70)
-            .background(LinearGradient(gradient: Gradient(colors: gradientColors), startPoint: .leading, endPoint: .trailing))
-            .cornerRadius(20)
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.white, lineWidth: 3)
-            )
+        Button(action: {
+            // Define the action for the button here
+        }) {
+            Text("YAY, OK!")
+                .font(.system(size: 24, weight: .bold)) // Customize the font size and weight as needed
+                .foregroundColor(.white) // Set the text color to white
+                .frame(minWidth: 0, maxWidth: .infinity) // Make the button expand to the width of its container
+                .padding() // Add some padding around the text
+                .background(LinearGradient(gradient: Gradient(colors: [Color.yellow, Color.orange]), startPoint: .leading, endPoint: .trailing)) // Apply a gradient background
+                .cornerRadius(30) // Apply a corner radius to round the corners
+                .shadow(color: .gray, radius: 2, x: 0, y: 2) // Apply a shadow effect
         }
     }
 }
 
 
-struct CustomButton_Previews: PreviewProvider {
+// Preview provider for SwiftUI previews in Xcode
+struct CustomButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomButton(letter: "C", number: "You are correct", action: {
-            // Perform action on tap
-        }, gradientColors: [Color.purple, Color.blue]) // You can change these colors
+        CustomButton()
+            .padding() // Add padding around the button
     }
 }

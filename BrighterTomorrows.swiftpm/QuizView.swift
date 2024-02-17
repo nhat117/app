@@ -52,7 +52,7 @@ struct MathQuizView: View {
                 // Answer buttons vertical stack
                 VStack(spacing: 20) {
                     ForEach(Array(zip(answers.indices, answers)), id: \.0) { index, answer in
-                        CustomButton(letter: button[index], number: answer, action: {
+                        CustomButtonQuiz(letter: button[index], number: answer, action: {
                             // Handle answer selection
                         }, gradientColors: [Color.purple, Color.blue]) // You can change these colors
                     }
