@@ -1,8 +1,7 @@
 import SwiftUI
 
 struct CongratsView: View {
-    let backgroundColor = Color(red: 76 / 255, green: 198 / 255, blue: 222 / 255)
-    
+    let backgroundColor = CustomColor().backgroundColor
     var body: some View {
         ZStack(alignment: .topLeading) {
             // Background color
@@ -24,13 +23,13 @@ struct CongratsView: View {
             .padding() // Add padding to move the button a bit from the edges
 
             VStack {
-                Spacer().frame(height: 100) // Add a spacer to push content down a bit
+                Spacer().frame(height: 180) // Add a spacer to push content down a bit
                 
                 ZStack {
                     // Rounded rectangle background
                     RoundedRectangle(cornerRadius: 25)
                         .fill(Color.white)
-                        .frame(height: 400)
+                        .frame(height: 450)
                         .shadow(radius: 5)
                     
                     // Text and image inside the rounded rectangle
@@ -41,16 +40,23 @@ struct CongratsView: View {
                         Image("congrats") // Adjust image name as needed
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 250)
+                            .frame(width: 300)
                         CustomButton().padding()
                     }
+                    // Stars image overlaying the top of the rounded rectangle
+                    Image("ribbon") // Use the correct image name here
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 300)
+                        .offset(y: -220) // Adjust the offset to position the bottom part of the image over the rectangle
                     
                     // Stars image overlaying the top of the rounded rectangle
                     Image("stars") // Use the correct image name here
                         .resizable()
                         .scaledToFit()
                         .frame(height: 150)
-                        .offset(y: -210) // Adjust the offset to position the bottom part of the image over the rectangle
+                        .offset(y: -300) // Adjust the offset to position the bottom part of the image over the rectangle
+                    Text("Quiz 1").bold().font(.system(size: 30)).offset(y:-250)
                 }
                 .padding(.horizontal)
             }

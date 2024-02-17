@@ -12,7 +12,7 @@ struct MathQuizView: View {
     let question: String = "3 + 5"
     let answers = ["12", "4", "8", "10"]
     let button = ["A","B","C", "D"]
-    let backgroundColor = Color(red: 76 / 255, green: 198 / 255, blue: 222 / 255)
+    let backgroundColor = CustomColor().backgroundColor
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -35,7 +35,7 @@ struct MathQuizView: View {
             // Vertical stack for the card and buttons
             VStack(spacing: 20) {
                 Color.clear.frame(height: 50)
-                Text("Question 1").font(.system(size: 35,weight: .bold)).foregroundStyle(Color(red: 5 / 255, green: 92 / 255, blue: 111 / 255))
+                Text("Question 1").font(.system(size: 35,weight: .bold)).foregroundStyle(CustomColor().header)
                 // Question card
                 ZStack {
                     RoundedRectangle(cornerRadius: 25)
