@@ -28,7 +28,7 @@ struct WelcomeView: View {
                 Text("Empathy is key when addressing domestic violence in any form, whether physical or emotional")
                     .padding(.horizontal)
                     .multilineTextAlignment(.center)
-                    .foregroundStyle(Color("text_color"))
+                    .foregroundStyle(Color("caption_color"))
                     .font(.callout)
                     .fontWeight(.semibold)
             }
