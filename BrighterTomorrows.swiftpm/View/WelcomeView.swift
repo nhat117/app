@@ -12,7 +12,7 @@ struct WelcomeView: View {
         NavigationStack {
             VStack {
                 Spacer()
-                
+                                
                 Image("welcome_view_image")
                     .resizable()
                     .aspectRatio(contentMode: .fit)

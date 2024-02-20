@@ -16,7 +16,7 @@ struct HomeView: View {
                     .ignoresSafeArea()
                 
                 VStack {
-                    HStack {
+                    HStack {                                
                         VStack(alignment: .leading) {
                             Text("HI,")
                                 .foregroundStyle(Color.white)
@@ -39,19 +39,19 @@ struct HomeView: View {
                     .padding(.horizontal, 30)
                     
                     VStack {
-                        NavigationLink(destination: DetailView()) {
+                        NavigationLink(destination: MathQuizView()) {
                             TopicCard(title: "Domestic Violence", backgroundColor: Color("red"), imageName: "domestic_violence", topicDesc: "Explore how children are being abused and its preventions")
                         }
                         
-                        NavigationLink(destination: DetailView()) {
+                        NavigationLink(destination: MathQuizView()) {
                             TopicCard(title: "Safety Planning", backgroundColor: Color("blue"), imageName: "domestic_violence")
                         }
                         
-                        NavigationLink(destination: DetailView()) {
+                        NavigationLink(destination: MathQuizView()) {
                             TopicCard(title: "Enquire User emotion", backgroundColor: Color("purple"), imageName: "domestic_violence")
                         }
                         
-                        NavigationLink(destination: DetailView()) {
+                        NavigationLink(destination: MathQuizView()) {
                             TopicCard(title: "Contacts and Resources", backgroundColor: Color("green"), imageName: "domestic_violence")
                         }
                     }
@@ -60,7 +60,7 @@ struct HomeView: View {
                     
                 }
             }
-        }        
+        }
     }
 }
 
