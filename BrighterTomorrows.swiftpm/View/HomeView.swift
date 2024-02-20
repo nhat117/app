@@ -39,19 +39,19 @@ struct HomeView: View {
                     .padding(.horizontal, 30)
                     
                     VStack {
-                        NavigationLink(destination: MathQuizView()) {
+                        NavigationLink(destination: QuizView()) {
                             TopicCard(title: "Domestic Violence", backgroundColor: Color("red"), imageName: "domestic_violence", topicDesc: "Explore how children are being abused and its preventions")
                         }
                         
-                        NavigationLink(destination: MathQuizView()) {
+                        NavigationLink(destination: QuizView()) {
                             TopicCard(title: "Safety Planning", backgroundColor: Color("blue"), imageName: "domestic_violence")
                         }
                         
-                        NavigationLink(destination: MathQuizView()) {
+                        NavigationLink(destination: QuizView()) {
                             TopicCard(title: "Enquire User emotion", backgroundColor: Color("purple"), imageName: "domestic_violence")
                         }
                         
-                        NavigationLink(destination: MathQuizView()) {
+                        NavigationLink(destination: QuizView()) {
                             TopicCard(title: "Contacts and Resources", backgroundColor: Color("green"), imageName: "domestic_violence")
                         }
                     }
