@@ -33,9 +33,15 @@ let package = Package(
             ]
         )
     ],
+    dependencies: [
+        .package(url: "https://github.com/SDWebImage/SDWebImageSwiftUI", "2.2.6"..<"3.0.0")
+    ],
     targets: [
         .executableTarget(
             name: "AppModule",
+            dependencies: [
+                .product(name: "SDWebImageSwiftUI", package: "sdwebimageswiftui")
+            ],
             path: "."
         )
     ]
