@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MathQuizView: View {
+struct QuizView: View {
     // Define the question and answers
     let question: String = "3 + 5"
     let answers = ["12", "4", "8", "10"]
@@ -66,6 +66,6 @@ struct MathQuizView: View {
 
 struct MathQuizView_Previews: PreviewProvider {
     static var previews: some View {
-        MathQuizView()
+        QuizView()
     }
 }
