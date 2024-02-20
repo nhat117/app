@@ -1,16 +1,24 @@
-//
-//  SwiftUIView.swift
-//  
-//
-//  Created by Trí Lai on 18/02/2024.
-//
-
 import SwiftUI
 
 struct WelcomeView: View {
+    @State private var showSheet: Bool = false
+
     var body: some View {
         NavigationStack {
             VStack {
+                HStack {
+                    Spacer()
+                    Button {
+                        showSheet.toggle()
+                    } label: {
+                        Image(systemName: "info.circle")
+                            .padding(.horizontal)
+                    }
+                    .sheet(isPresented: $showSheet) {
+                        AppInfoView()
+                    }
+                }
+                
                 Spacer()
                                 
                 Image("welcome_view_image")
