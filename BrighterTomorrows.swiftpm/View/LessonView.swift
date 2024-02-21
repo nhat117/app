@@ -4,7 +4,7 @@ struct PlaygroundMapView: View {
     @State private var selectedFeature: PlaygroundFeature?
     @State private var messageText: String = "" // Message for the chat bubble
     @State private var showMessage: Bool = false // Controls visibility of the message and bubble
-    @State private var titleText: String = "Tap on a pin to learn more!" // Default title text
+    @State private var titleText: String = "Tap on a pin to explore!" // Default title text
 
     // Define a data structure for map pin information
     struct MapPin {
@@ -27,23 +27,23 @@ struct PlaygroundMapView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
+                Color("primary") // Use a semi-transparent primary color for the background
+                              .edgesIgnoringSafeArea(.all) // Extend the color to the edges of the screen
                 Image("playground_map") // Background image of the playground map
                     .resizable()
                     .scaledToFit()
-                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .frame(width: geometry.size.width - 50, height: geometry.size.height)
                     .padding() // Add padding around the map for more space
                     .onTapGesture {
                         self.showMessage = false
-                        self.titleText = "Tap on a pin to learn more!"
+                        self.titleText = "Tap on a pin to explore"
                     }
 
                 Text(titleText) // Title Text
                     .font(.title)
                     .padding([.top, .leading, .trailing], 20)
-                    .background(Color.white.opacity(0.85))
-                    .cornerRadius(10)
                     .foregroundColor(Color.black)
-                    .position(x: geometry.size.width / 2, y: geometry.safeAreaInsets.top + 35)
+                    .position(x: geometry.size.width / 2, y: geometry.safeAreaInsets.top + 50)
 
                 ForEach(mapPins.indices, id: \.self) { index in // Iterate over the map pins
                     let pin = mapPins[index]
@@ -64,14 +64,14 @@ struct PlaygroundMapView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(height: 200)
-                    .position(x: geometry.size.width - 60, y: geometry.size.height - 90)
+                    .position(x: geometry.size.width - 80, y: geometry.size.height - 100)
 
                 if showMessage { // Chat bubble and message
                     Image("bubble")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 190)
-                        .position(x: geometry.size.width - 150, y: geometry.size.height - 180)
+                        .position(x: geometry.size.width - 160, y: geometry.size.height - 200)
 
                     Text(messageText)
                         .font(.caption)
@@ -81,7 +81,7 @@ struct PlaygroundMapView: View {
                         .background(Color.white)
                         .cornerRadius(10)
                         .foregroundColor(Color.black)
-                        .position(x: geometry.size.width - 150, y: geometry.size.height - 180)
+                        .position(x: geometry.size.width - 160, y: geometry.size.height - 200)
                 }
 
                 Button(action: { // Back Button
@@ -97,20 +97,8 @@ struct PlaygroundMapView: View {
                         .shadow(radius: 3)
                 }
                 .padding([.top, .leading], 30)
-                .position(x: geometry.safeAreaInsets.leading + 40, y: geometry.safeAreaInsets.top + 35)
+                .position(x: geometry.safeAreaInsets.leading + 40, y: geometry.safeAreaInsets.top - 40)
 
-                Button(action: { // New button with green background and airplane icon
-                    // Define the action for your button here
-                }) {
-                    Image(systemName: "airplane.departure")
-                        .font(.system(size: 24))
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.green)
-                        .clipShape(Circle())
-                        .shadow(radius: 3)
-                }
-                .position(x: geometry.size.width - 40, y: geometry.safeAreaInsets.top + 35) // Positioned opposite to the back button
             }
         }
     }
