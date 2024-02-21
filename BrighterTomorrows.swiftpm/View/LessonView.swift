@@ -2,122 +2,131 @@ import SwiftUI
 
 struct PlaygroundMapView: View {
     @State private var selectedFeature: PlaygroundFeature?
-    @State private var messageText: String = "" // Empty initial message
-    @State private var showMessage: Bool = false // Controls the visibility of the message and bubble
+    @State private var messageText: String = "" // Message for the chat bubble
+    @State private var showMessage: Bool = false // Controls visibility of the message and bubble
+    @State private var titleText: String = "Tap on a pin to explore!" // Default title text
+
+    // Define a data structure for map pin information
+    struct MapPin {
+        var feature: PlaygroundFeature
+        var xMultiplier: CGFloat
+        var yMultiplier: CGFloat
+    }
+
+    // Create an array of map pins
+    let mapPins: [MapPin] = [
+        MapPin(feature: .sandbox, xMultiplier: 0.2, yMultiplier: 0.33),
+        MapPin(feature: .sandbox, xMultiplier: 0.23, yMultiplier: 0.46),
+        MapPin(feature: .sandbox, xMultiplier: 0.4, yMultiplier: 0.67),
+        MapPin(feature: .sandbox, xMultiplier: 0.5, yMultiplier: 0.6),
+        MapPin(feature: .sandbox, xMultiplier: 0.5, yMultiplier: 0.5),
+        MapPin(feature: .sandbox, xMultiplier: 0.6, yMultiplier: 0.3)
+        // Add more pins as needed
+    ]
 
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                // Background image of the playground map
-                Image("playground_map")
+                Color("primary") // Use a semi-transparent primary color for the background
+                              .edgesIgnoringSafeArea(.all) // Extend the color to the edges of the screen
+                Image("playground_map") // Background image of the playground map
                     .resizable()
                     .scaledToFit()
-                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .frame(width: geometry.size.width - 50, height: geometry.size.height)
+                    .padding() // Add padding around the map for more space
                     .onTapGesture {
-                        // Hide the message and bubble when the background is tapped
                         self.showMessage = false
+                        self.titleText = "Tap on a pin to explore"
                     }
 
-                // Interactive pins
-                // Example pin for the sandbox feature
-                Image("map_pin")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 30)
-                    .position(x: geometry.size.width * 0.3, y: geometry.size.height * 0.2)
-                    .onTapGesture {
-                        self.selectedFeature = .sandbox
-                        self.messageText = "This is the sandbox where kids can build castles."
-                        self.showMessage = true
-                    }
-                
-                Image("map_pin")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 30)
-                    .position(x: geometry.size.width * 0.6, y: geometry.size.height * 0.4)
-                    .onTapGesture {
-                        self.selectedFeature = .sandbox
-                        self.messageText = "This is the sandbox where kids can build castles."
-                        self.showMessage = true
-                    }
-                Image("map_pin")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 30)
-                    .position(x: geometry.size.width * 0.3, y: geometry.size.height * 0.2)
-                    .onTapGesture {
-                        self.selectedFeature = .sandbox
-                        self.messageText = "This is the sandbox where kids can build castles."
-                        self.showMessage = true
-                    }
-                Image("map_pin")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 30)
-                    .position(x: geometry.size.width * 0.3, y: geometry.size.height * 0.2)
-                    .onTapGesture {
-                        self.selectedFeature = .sandbox
-                        self.messageText = "This is the sandbox where kids can build castles."
-                        self.showMessage = true
-                    }
-                Image("map_pin")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30, height: 30)
-                    .position(x: geometry.size.width * 0.3, y: geometry.size.height * 0.2)
-                    .onTapGesture {
-                        self.selectedFeature = .sandbox
-                        self.messageText = "This is the sandbox where kids can build castles."
-                        self.showMessage = true
-                    }
-                
-                // Add other pin images for different features here, with appropriate x and y multipliers
+                Text(titleText) // Title Text
+                    .font(.title)
+                    .padding([.top, .leading, .trailing], 20)
+                    .foregroundColor(Color.black)
+                    .position(x: geometry.size.width / 2, y: geometry.safeAreaInsets.top + 50)
 
-                // Mascot image in the bottom right corner
-                Image("mascot") // Replace "mascot" with your mascot image file name
+                ForEach(mapPins.indices, id: \.self) { index in // Iterate over the map pins
+                    let pin = mapPins[index]
+                    Image("map_pin")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 30, height: 30)
+                        .position(x: geometry.size.width * pin.xMultiplier, y: geometry.size.height * pin.yMultiplier)
+                        .onTapGesture {
+                            self.selectedFeature = pin.feature
+                            self.messageText = "This is the \(pin.feature.description) where kids can build castles."
+                            self.showMessage = true
+                            self.updateTitle(for: pin.feature)
+                        }
+                }
+
+                Image("mascot") // Mascot image in the bottom right corner
                     .resizable()
                     .scaledToFit()
                     .frame(height: 200)
-                    .position(x: geometry.size.width - 60, y: geometry.size.height - 90 )
+                    .position(x: geometry.size.width - 80, y: geometry.size.height - 100)
 
-                if showMessage {
-                    // Chat bubble image near the mascot
-                    Image("bubble") // Replace "bubble" with your chat bubble image file name
+                if showMessage { // Chat bubble and message
+                    Image("bubble")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 160)
-                        .position(x: geometry.size.width - 150, y: geometry.size.height - 140)
+                        .frame(width: 190)
+                        .position(x: geometry.size.width - 160, y: geometry.size.height - 200)
 
-                    // Text inside the chat bubble
                     Text(messageText)
                         .font(.caption)
                         .padding(10)
-                        .frame(width: 120) // Fixed width for the text
-                        .multilineTextAlignment(.center) // Center-aligned text
+                        .frame(width: 120)
+                        .multilineTextAlignment(.center)
                         .background(Color.white)
                         .cornerRadius(10)
                         .foregroundColor(Color.black)
-                        .position(x: geometry.size.width - 150, y: geometry.size.height - 140)
+                        .position(x: geometry.size.width - 160, y: geometry.size.height - 200)
                 }
+
+                Button(action: { // Back Button
+                    // Action for the back button
+                }) {
+                    Image(systemName: "arrow.left")
+                        .font(.system(size: 24))
+                        .foregroundColor(.black)
+                        .padding()
+                        .background(Color.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 2))
+                        .shadow(radius: 3)
+                }
+                .padding([.top, .leading], 30)
+                .position(x: geometry.safeAreaInsets.leading + 40, y: geometry.safeAreaInsets.top - 40)
+
             }
+        }
+    }
+
+    private func updateTitle(for feature: PlaygroundFeature) { // Function to update the title text
+        switch feature {
+        case .sandbox:
+            titleText = "Sandbox: Let's build some castles!"
+        // Add cases for other features with appropriate messages
+        default:
+            titleText = "Explore the playground!"
         }
     }
 }
 
-// Enum to represent different features on the playground map
-enum PlaygroundFeature {
-    case sandbox
-    case swings
-    case pond
-    case parking
-    case storm
-    case island
-    // Add other features as needed
+enum PlaygroundFeature: CustomStringConvertible { // Enum to represent different features
+    case sandbox, swings, pond, parking, slide, picnicArea
+
+    var description: String {
+        switch self {
+        case .sandbox: return "sandbox"
+        // Add descriptions for other features
+        default: return "feature"
+        }
+    }
 }
 
-// Preview provider for SwiftUI canvas
-struct PlaygroundMapView_Previews: PreviewProvider {
+struct PlaygroundMapView_Previews: PreviewProvider { // Preview provider
     static var previews: some View {
         PlaygroundMapView()
     }
