@@ -18,7 +18,7 @@ struct AppInfoView: View {
                     dismiss()
                 }
                 .padding()
-                .tint(.secondary)
+                .tint(Color("primary"))
                 
                 Spacer()
 
