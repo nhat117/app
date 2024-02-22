@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct CongratsView: View {
+    @Binding var name: String
+    @Binding var srcScreen: String
     let backgroundColor = CustomColor().backgroundColor
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -34,14 +36,14 @@ struct CongratsView: View {
                     
                     // Text and image inside the rounded rectangle
                     VStack {
-                        Text("Good job, Liam!")
+                        Text("Good job, \(name)!")
                             .font(.system(size: 30))
                             .padding(.top) // Add padding to move the text down inside the rectangle
                         Image("congrats") // Adjust image name as needed
                             .resizable()
                             .scaledToFit()
                             .frame(width: 300)
-                        CustomButton().padding()
+                        CustomButton(action: {}).padding()
                     }
                     // Stars image overlaying the top of the rounded rectangle
                     Image("ribbon") // Use the correct image name here
@@ -56,7 +58,7 @@ struct CongratsView: View {
                         .scaledToFit()
                         .frame(height: 150)
                         .offset(y: -300) // Adjust the offset to position the bottom part of the image over the rectangle
-                    Text("Quiz 1").bold().font(.system(size: 30)).offset(y:-250)
+                    Text("\(srcScreen)").bold().font(.system(size: 30)).offset(y:-250)
                 }
                 .padding(.horizontal)
             }
@@ -67,6 +69,6 @@ struct CongratsView: View {
 // Preview provider for SwiftUI previews in Xcode
 struct CongratsView_Previews: PreviewProvider {
     static var previews: some View {
-        CongratsView()
+        CongratsView(name: .constant("Liam"), srcScreen: .constant("Quiz 1"))
     }
 }

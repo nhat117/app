@@ -5,7 +5,8 @@ struct PlaygroundMapView: View {
     @State private var messageText: String = "" // Message for the chat bubble
     @State private var showMessage: Bool = false // Controls visibility of the message and bubble
     @State private var titleText: String = "Tap on a pin to explore!" // Default title text
-
+ 
+    let lesson = ScenarioData().scenarios1
     // Define a data structure for map pin information
     struct MapPin {
         var feature: PlaygroundFeature
@@ -16,11 +17,11 @@ struct PlaygroundMapView: View {
     // Create an array of map pins
     let mapPins: [MapPin] = [
         MapPin(feature: .sandbox, xMultiplier: 0.2, yMultiplier: 0.33),
-        MapPin(feature: .sandbox, xMultiplier: 0.23, yMultiplier: 0.46),
-        MapPin(feature: .sandbox, xMultiplier: 0.4, yMultiplier: 0.67),
-        MapPin(feature: .sandbox, xMultiplier: 0.5, yMultiplier: 0.6),
-        MapPin(feature: .sandbox, xMultiplier: 0.5, yMultiplier: 0.5),
-        MapPin(feature: .sandbox, xMultiplier: 0.6, yMultiplier: 0.3)
+        MapPin(feature: .swings, xMultiplier: 0.23, yMultiplier: 0.46),
+        MapPin(feature: .picnicArea, xMultiplier: 0.4, yMultiplier: 0.67),
+        MapPin(feature: .slide, xMultiplier: 0.5, yMultiplier: 0.6),
+        MapPin(feature: .parking, xMultiplier: 0.5, yMultiplier: 0.5),
+//        MapPin(feature: ., xMultiplier: 0.6, yMultiplier: 0.3)
         // Add more pins as needed
     ]
 
@@ -54,9 +55,7 @@ struct PlaygroundMapView: View {
                         .position(x: geometry.size.width * pin.xMultiplier, y: geometry.size.height * pin.yMultiplier)
                         .onTapGesture {
                             self.selectedFeature = pin.feature
-                            self.messageText = "This is the \(pin.feature.description) where kids can build castles."
-                            self.showMessage = true
-                            self.updateTitle(for: pin.feature)
+                                       self.updateContent(for: pin.feature)
                         }
                 }
 
@@ -102,6 +101,8 @@ struct PlaygroundMapView: View {
             }
         }
     }
+    
+    
 
     private func updateTitle(for feature: PlaygroundFeature) { // Function to update the title text
         switch feature {
@@ -112,19 +113,34 @@ struct PlaygroundMapView: View {
             titleText = "Explore the playground!"
         }
     }
+    
+    private func updateContent(for feature: PlaygroundFeature) {
+            if let scenario = lesson.first(where: { $0.id == feature.rawValue }) {
+                self.titleText = scenario.description
+                self.messageText = scenario.choices
+                self.showMessage = true
+            } else {
+                self.titleText = "Explore the playground!"
+                self.showMessage = false
+            }
+        }
 }
 
-enum PlaygroundFeature: CustomStringConvertible { // Enum to represent different features
-    case sandbox, swings, pond, parking, slide, picnicArea
+enum PlaygroundFeature: Int, CustomStringConvertible {
+    case sandbox = 1, swings, pond, parking, slide, picnicArea
 
     var description: String {
         switch self {
         case .sandbox: return "sandbox"
-        // Add descriptions for other features
-        default: return "feature"
+        case .swings: return "swings"
+        case .pond: return "pond"
+        case .parking: return "parking"
+        case .slide: return "slide"
+        case .picnicArea: return "picnic area"
         }
     }
 }
+
 
 struct PlaygroundMapView_Previews: PreviewProvider { // Preview provider
     static var previews: some View {
