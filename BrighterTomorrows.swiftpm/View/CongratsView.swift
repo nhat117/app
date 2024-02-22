@@ -38,14 +38,15 @@ struct CongratsView: View {
                     VStack {
                         Text("Good job, \(name)!")
                             .font(.system(size: 30))
-                            .padding(.top) // Add padding to move the text down inside the rectangle
-                        Image("congrats") // Adjust image name as needed
+                            .padding(.top)
+                        Image("congrats") 
+  
                             .resizable()
                             .scaledToFit()
                             .frame(width: 300)
                         CustomButton(action: {}).padding()
                     }
-                    // Stars image overlaying the top of the rounded rectangle
+                
                     Image("ribbon") // Use the correct image name here
                         .resizable()
                         .scaledToFit()
