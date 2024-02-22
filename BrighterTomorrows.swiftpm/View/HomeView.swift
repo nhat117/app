@@ -69,7 +69,7 @@ struct HomeView: View {
                             TopicCard(title: "Domestic Violence", backgroundColor: Color("red"), imageName: "domestic_violence", topicDesc: "Explore how children are being abused and its preventions")
                         }
                         
-                        NavigationLink(destination: QuizView()) {
+                        NavigationLink(destination: EmotionView()) {
                             TopicCard(title: "Safety Planning", backgroundColor: Color("blue"), imageName: "domestic_violence")
                         }
                         

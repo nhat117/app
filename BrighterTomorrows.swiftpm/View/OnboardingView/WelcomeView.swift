@@ -48,7 +48,7 @@ struct WelcomeView: View {
             
             Spacer(minLength: 130)
             
-            NavigationLink(destination: HomeView(), label: {
+            NavigationLink(destination: NameAskingView(), label: {
                 Image(systemName: "arrow.right.circle")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
