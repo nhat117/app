@@ -14,9 +14,8 @@ enum Theme {
 struct HomeView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
-
-    @State private var username = "Iris"
-    
+    @AppStorage("username") var currentUserName: String?
+        
 //    var backButton: some View {
 //        Button(action: {
 //            withAnimation() {
@@ -48,7 +47,7 @@ struct HomeView: View {
                                 .foregroundStyle(Color.white)
                                 .font(.system(size: 28, weight: .semibold))
 
-                            Text(username.uppercased())
+                            Text(currentUserName.uppercased())
                                 .foregroundStyle(Color("text_color"))
                                 .font(.system(size: 40, weight: .bold))
                         }
