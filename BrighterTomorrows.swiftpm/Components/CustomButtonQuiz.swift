@@ -1,10 +1,10 @@
 import SwiftUI
-//Custom color button 
 struct CustomButtonQuiz: View {
     var letter: String
     var number: String
     var action: () -> Void
     var gradientColors: [Color]
+    var borderColor: Color // New parameter for border color
 
     var body: some View {
         Button(action: action) {
@@ -13,7 +13,7 @@ struct CustomButtonQuiz: View {
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding(.leading)
-                    .font(.system(size: 30))
+                    .font(.system(size: 25))
 
                 Spacer()
 
@@ -21,24 +21,15 @@ struct CustomButtonQuiz: View {
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding(.trailing)
-                    .font(.system(size: 25))
+                    .font(.system(size: 20))
             }
             .frame(width: 350, height: 70)
             .background(LinearGradient(gradient: Gradient(colors: gradientColors), startPoint: .leading, endPoint: .trailing))
             .cornerRadius(20)
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.white, lineWidth: 3)
+                    .stroke(borderColor, lineWidth: 5) // Use the borderColor parameter
             )
         }
-    }
-}
-
-
-struct CustomButton_Previews: PreviewProvider {
-    static var previews: some View {
-        CustomButtonQuiz(letter: "C", number: "You are correct", action: {
-            // Perform action on tap
-        }, gradientColors: [Color.purple, Color.blue]) // You can change these colors
     }
 }

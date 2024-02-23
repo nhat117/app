@@ -3,11 +3,17 @@ import SwiftUI
 struct QuizView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
-    
+    @AppStorage("srcView") var username: String = "1"
+
     // Define the question and answers
-    let question: String = "3 + 5"
-    let answers = ["12", "4", "8", "10"]
-    let button = ["A","B","C", "D"]
+    var quizData: QuizData // Accepting QuizData as input
+
+        // State variables for dynamic content and user interaction
+    @State private var currentQuestionIndex = 0
+    @State private var selectedOptionID: Int?
+    @State private var isAnswered = false
+    @State private var showCongratsView = false
+    let buttonLabel = ["A", "B", "C","D"]
     let backgroundColor = CustomColor().backgroundColor
 
     var backButton: some View {
@@ -41,7 +47,7 @@ struct QuizView: View {
             VStack(spacing: 20) {
                 Color.clear.frame(height: 50)
                 
-                Text("Question 1")
+                Text("Question \(currentQuestionIndex + 1)")
                     .font(.system(size: 35,weight: .bold, design: .rounded))
                     .foregroundStyle(CustomColor().header)
                 
@@ -52,22 +58,32 @@ struct QuizView: View {
                         .frame(height: 150)
                         .shadow(radius: 5)
 
-                    Text(question)
-                        .font(.largeTitle)
+                    Text(quizData.questionsBank2.questions[currentQuestionIndex].text)
+                        .font(.system(size: 23,weight: .bold, design: .rounded))
                         .bold()
                 }
                 .padding()
 
                 // Answer buttons vertical stack
-                VStack(spacing: 20) {
-                    ForEach(Array(zip(answers.indices, answers)), id: \.0) { index, answer in
-                        CustomButtonQuiz(letter: button[index], number: answer, action: {
-                            // Handle answer selection
-                        }, gradientColors: [Color.purple, Color.blue]) // You can change these colors
+                    VStack(spacing: 20) {
+                        ForEach(Array(zip(buttonLabel.indices, quizData.questionsBank2.questions[currentQuestionIndex].options)), id: \.0) { index, option in
+                            CustomButtonQuiz(
+                                letter: buttonLabel[index],
+                                number: option.text,
+                                action: {
+                                    answerSelected(option.id)
+                                    
+                                },
+                                gradientColors: [Color.purple, Color.blue],
+                                borderColor: getBorderColor(forOptionID: option.id, correctOptionID: quizData.questionsBank2.questions[currentQuestionIndex].correctOptionID)
+                            )
+                        }
                     }
+                    .padding()
+                    
+                    NavigationLink("", destination: CongratsView(name: .constant("Liam"), srcScreen: .constant("Quiz 1")), isActive: $showCongratsView)
                 }
-                .padding()
-            }
+            
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -78,10 +94,45 @@ struct QuizView: View {
             }
         }
     }
+    func answerSelected(_ optionID: Int) {
+            selectedOptionID = optionID
+            isAnswered = true
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                if currentQuestionIndex < quizData.questionsBank2.questions.count - 1 {
+                    currentQuestionIndex += 1
+                    selectedOptionID = nil
+                    isAnswered = false
+                } else {
+                    // Handle the end of the quiz
+                    showCongratsView = true
+                }
+            }
+        }
+    func getBorderColor(forOptionID optionID: Int, correctOptionID: Int) -> Color {
+        // No option selected yet
+        guard let selectedOptionID = selectedOptionID else {
+            return Color.clear // No border color if no option is selected
+        }
+
+        // Correct option selected
+        if selectedOptionID == correctOptionID {
+            return optionID == selectedOptionID ? Color.green : Color.clear
+        } else {
+            // Incorrect option selected
+            if optionID == selectedOptionID {
+                return Color.red // Red border for the incorrectly selected option
+            } else if optionID == correctOptionID {
+                return Color(red: 124/255, green: 226/255, blue: 139/255) // Green border for the correct option
+            } else {
+                return Color.clear // No border color for unselected options
+            }
+        }
+    }
 }
 
 struct MathQuizView_Previews: PreviewProvider {
     static var previews: some View {
-        QuizView()
+        QuizView(quizData:QuizData())
     }
 }
