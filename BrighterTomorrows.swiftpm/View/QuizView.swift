@@ -3,7 +3,8 @@ import SwiftUI
 struct QuizView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
-    
+    @AppStorage("srcView") var username: String = "1"
+
     // Define the question and answers
     var quizData: QuizData // Accepting QuizData as input
 
@@ -11,6 +12,7 @@ struct QuizView: View {
     @State private var currentQuestionIndex = 0
     @State private var selectedOptionID: Int?
     @State private var isAnswered = false
+    @State private var showCongratsView = false
     let buttonLabel = ["A", "B", "C","D"]
     let backgroundColor = CustomColor().backgroundColor
 
@@ -63,21 +65,25 @@ struct QuizView: View {
                 .padding()
 
                 // Answer buttons vertical stack
-                VStack(spacing: 20) {
-                    ForEach(Array(zip(buttonLabel.indices, quizData.questionsBank2.questions[currentQuestionIndex].options)), id: \.0) { index, option in
-                        CustomButtonQuiz(
-                            letter: buttonLabel[index],
-                            number: option.text,
-                            action: {
-                                answerSelected(option.id)
-                            },
-                            gradientColors: [Color.purple, Color.blue],
-                            borderColor: getBorderColor(forOptionID: option.id, correctOptionID: quizData.questionsBank2.questions[currentQuestionIndex].correctOptionID)
-                        )
+                    VStack(spacing: 20) {
+                        ForEach(Array(zip(buttonLabel.indices, quizData.questionsBank2.questions[currentQuestionIndex].options)), id: \.0) { index, option in
+                            CustomButtonQuiz(
+                                letter: buttonLabel[index],
+                                number: option.text,
+                                action: {
+                                    answerSelected(option.id)
+                                    
+                                },
+                                gradientColors: [Color.purple, Color.blue],
+                                borderColor: getBorderColor(forOptionID: option.id, correctOptionID: quizData.questionsBank2.questions[currentQuestionIndex].correctOptionID)
+                            )
+                        }
                     }
+                    .padding()
+                    
+                    NavigationLink("", destination: CongratsView(name: .constant("Liam"), srcScreen: .constant("Quiz 1")), isActive: $showCongratsView)
                 }
-                .padding()
-            }
+            
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -99,6 +105,7 @@ struct QuizView: View {
                     isAnswered = false
                 } else {
                     // Handle the end of the quiz
+                    showCongratsView = true
                 }
             }
         }
