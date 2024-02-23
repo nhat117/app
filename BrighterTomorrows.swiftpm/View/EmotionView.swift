@@ -1,43 +1,52 @@
 import SwiftUI
 
 struct EmotionView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
     @State private var sliderValue: Double = 50
 
+    var backButton: some View {
+        Button(action: {
+            withAnimation() {
+                presentationMode.wrappedValue.dismiss()
+            }
+        }) {
+            Image(systemName: "arrow.left")
+                .font(.system(size: 22))
+                .foregroundColor(.black)
+                .padding(.all, 8)
+                .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.black, lineWidth: 2)
+                )
+                .shadow(radius: 3)
+        }
+        .padding(.vertical)
+    }
+    
     var body: some View {
         ZStack (alignment: .topLeading){ // Use a ZStack to ensure the background covers the entire screen
             CustomColor().backgroundColor
                 .edgesIgnoringSafeArea(.all) // Make the background extend to the edges
             HStack {
-                            Button(action: {
-                                // Action for the back button
-                            }) {
-                                Image(systemName: "arrow.left") // Use a system image for the back arrow
-                                    .font(.system(size: 24)) // Set the font size to make the arrow larger
-                                    .foregroundColor(.black)
-                                    .padding()
-                                    .background(Color.white) // Semi-transparent background
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 2))
-                                    .shadow(radius: 3)
-                            }
-                            .padding() // Add padding to move the button a bit from the edges
-                            
-                            Spacer() // Add a spacer to push the next button to the right
-                            
-                            Button(action: {
-                                // Action for the add button
-                            }) {
-                                Image(systemName: "camera") // Use a system image for the add button
-                                    .font(.system(size: 24)) // Set the font size to make the button larger
-                                    .foregroundColor(.black)
-                                    .padding()
-                                    .background(Color.white) // Semi-transparent background
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 2))
-                                    .shadow(radius: 3)
-                            }
-                            .padding() // Add padding to move the button a bit from the edges
-                        }
+                Spacer()
+                
+                Button(action: {
+                    // Action for the add button
+                }) {
+                    Image(systemName: "camera")
+                        .font(.system(size: 24))
+                        .foregroundColor(.black)
+                        .padding()
+                        .background(Color.white) // Semi-transparent background
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 2))
+                        .shadow(radius: 3)
+                }
+                .padding()
+            }
             VStack {
                 Color.clear.frame(height: 90)
                 Text("How do you feel today ?").font(.system(size: 30, weight: .bold))
@@ -49,7 +58,14 @@ struct EmotionView: View {
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                 .frame(height: 520) // Adjust the height as needed
-                
+            }
+        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                HStack(spacing: 20) {
+                    backButton
+                }
             }
         }
     }
