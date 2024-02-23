@@ -3,6 +3,9 @@ import SwiftUI
 struct CongratsView: View {
     @Binding var name: String
     @Binding var srcScreen: String
+    @Environment(\.presentationMode) var presentationMode
+    @AppStorage("username") var username: String = "Anonymous"
+    @AppStorage("srcView") var srcView: String = "1"
     let backgroundColor = CustomColor().backgroundColor
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -12,6 +15,7 @@ struct CongratsView: View {
             
             Button(action: {
                 // Action for the back button
+                presentationMode.wrappedValue.dismiss()
             }) {
                 Image(systemName: "arrow.left") // Use a system image for the back arrow
                     .font(.system(size: 24)) // Set the font size to make the arrow larger
@@ -36,16 +40,17 @@ struct CongratsView: View {
                     
                     // Text and image inside the rounded rectangle
                     VStack {
-                        Text("Good job, \(name)!")
+                        Text("Good job, \(username)!")
                             .font(.system(size: 30))
-                            .padding(.top) // Add padding to move the text down inside the rectangle
-                        Image("congrats") // Adjust image name as needed
+                            .padding(.top)
+                        Image("congrats") 
+  
                             .resizable()
                             .scaledToFit()
                             .frame(width: 300)
                         CustomButton(action: {}).padding()
                     }
-                    // Stars image overlaying the top of the rounded rectangle
+                
                     Image("ribbon") // Use the correct image name here
                         .resizable()
                         .scaledToFit()
@@ -58,7 +63,7 @@ struct CongratsView: View {
                         .scaledToFit()
                         .frame(height: 150)
                         .offset(y: -300) // Adjust the offset to position the bottom part of the image over the rectangle
-                    Text("\(srcScreen)").bold().font(.system(size: 30)).offset(y:-250)
+                    Text("\(srcView)").bold().font(.system(size: 30)).offset(y:-250)
                 }
                 .padding(.horizontal)
             }
