@@ -2,7 +2,30 @@ import SwiftUI
 
 struct EmotionHistoryView: View {
     @State private var emotionEntries: [EmotionEntry] = []
-
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
+    
+    var backButton: some View {
+        Button(action: {
+            withAnimation() {
+                presentationMode.wrappedValue.dismiss()
+            }
+        }) {
+            Image(systemName: "arrow.left")
+                .font(.system(size: 22))
+                .foregroundColor(.black)
+                .padding(.all, 8)
+                .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.black, lineWidth: 2)
+                )
+                .shadow(radius: 3)
+        }
+        .frame(width: 44, height: 44) 
+        .padding(.vertical)
+    }
     var body: some View {
         ZStack {
             Color("primary")
@@ -20,6 +43,14 @@ struct EmotionHistoryView: View {
             }
             .onAppear {
                 loadEmotionHistory()
+            }
+        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                HStack(spacing: 20) {
+                    backButton
+                }
             }
         }
     }

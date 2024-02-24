@@ -1,10 +1,3 @@
-//
-//  SwiftUIView.swift
-//  
-//
-//  Created by Trí Lai on 20/02/2024.
-//
-
 import SwiftUI
 
 struct QuestionCard: View {

@@ -8,12 +8,8 @@ struct NameAskingView: View {
         NavigationStack {
             VStack {
                 Spacer()
-                
-                // Greeting message
                 Text("Hi 👋\n") +
                 Text("Please tell us a little bit about ")
-                
-                // Check tappable text to show text field
                 if isTextClicked {
                     TextField("name", text: $username)
                         .frame(width: 150)
@@ -30,7 +26,6 @@ struct NameAskingView: View {
                         .textContentType(.name)
 
                 } else {
-                    // Show tappable text by default
                     Button(role: .none) {
                         withAnimation { isTextClicked.toggle() }
                     } label: {
@@ -42,8 +37,7 @@ struct NameAskingView: View {
                 }
                 
                 Spacer()
-                
-                // Check text field is fullfilled to move to next screen
+
                 if (!username.isEmpty) {
                     NavigationLink(destination: AgeAskingView(), label: {
                         Text("Next")
