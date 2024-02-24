@@ -4,7 +4,7 @@ struct QuizView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
     @AppStorage("srcView") var username: String = "1"
-
+    @Binding var isPresenting: Bool
     // Define the question and answers
     var quizData: QuizData // Accepting QuizData as input
 
@@ -38,33 +38,34 @@ struct QuizView: View {
     }
     
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            // Background color
-            backgroundColor
-                .edgesIgnoringSafeArea(.all)
-            
-            // Vertical stack for the card and buttons
-            VStack(spacing: 20) {
-                Color.clear.frame(height: 50)
+        NavigationStack {
+            ZStack(alignment: .topLeading) {
+                // Background color
+                backgroundColor
+                    .edgesIgnoringSafeArea(.all)
                 
-                Text("Question \(currentQuestionIndex + 1)")
-                    .font(.system(size: 35,weight: .bold, design: .rounded))
-                    .foregroundStyle(CustomColor().header)
-                
-                // Question card
-                ZStack {
-                    RoundedRectangle(cornerRadius: 25)
-                        .fill(Color.white)
-                        .frame(height: 150)
-                        .shadow(radius: 5)
-
-                    Text(quizData.questionsBank2.questions[currentQuestionIndex].text)
-                        .font(.system(size: 23,weight: .bold, design: .rounded))
-                        .bold()
-                }
-                .padding()
-
-                // Answer buttons vertical stack
+                // Vertical stack for the card and buttons
+                VStack(spacing: 20) {
+                    Color.clear.frame(height: 50)
+                    
+                    Text("Question \(currentQuestionIndex + 1)")
+                        .font(.system(size: 35,weight: .bold, design: .rounded))
+                        .foregroundStyle(CustomColor().header)
+                    
+                    // Question card
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 25)
+                            .fill(Color.white)
+                            .frame(height: 150)
+                            .shadow(radius: 5)
+                        
+                        Text(quizData.questionsBank2.questions[currentQuestionIndex].text)
+                            .font(.system(size: 23,weight: .bold, design: .rounded))
+                            .bold()
+                    }
+                    .padding()
+                    
+                    // Answer buttons vertical stack
                     VStack(spacing: 20) {
                         ForEach(Array(zip(buttonLabel.indices, quizData.questionsBank2.questions[currentQuestionIndex].options)), id: \.0) { index, option in
                             CustomButtonQuiz(
@@ -81,15 +82,18 @@ struct QuizView: View {
                     }
                     .padding()
                     
-                    NavigationLink("", destination: CongratsView(name: .constant("Liam"), srcScreen: .constant("Quiz 1")), isActive: $showCongratsView)
+                    NavigationLink(destination: CongratsView(isPresenting: $isPresenting), isActive: $showCongratsView) {
+                           EmptyView()
+                       }
                 }
-            
-        }
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                HStack(spacing: 20) {
-                    backButton
+                
+            }
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    HStack(spacing: 20) {
+                        backButton
+                    }
                 }
             }
         }
@@ -106,6 +110,7 @@ struct QuizView: View {
                 } else {
                     // Handle the end of the quiz
                     showCongratsView = true
+//                    isPresenting = false
                 }
             }
         }
@@ -133,6 +138,6 @@ struct QuizView: View {
 
 struct MathQuizView_Previews: PreviewProvider {
     static var previews: some View {
-        QuizView(quizData:QuizData())
+        QuizView(isPresenting: .constant(true), quizData:QuizData())
     }
 }
