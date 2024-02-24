@@ -41,7 +41,7 @@ struct HomeView: View {
                     }
                     .padding(.horizontal, 30)
                     
-                    VStack {
+                    ScrollView {
                         NavigationStack {
                            if !isPresentingQuiz {
                                TopicCard(title: "Quiz", backgroundColor: Color("red"), imageName: "quiz_icon")
@@ -61,15 +61,16 @@ struct HomeView: View {
                            }
                         }.fullScreenCover( isPresented: $isPresentingLesson){
                             PlaygroundMapView(isPresenting: $isPresentingLesson)
+                                .navigationBarTitle("Title", displayMode: .inline)
                         }
                         
                         NavigationLink(destination: EmotionView()) {
                             TopicCard(title: "Enquire User emotion", backgroundColor: Color("purple"), imageName: "emotion_icon")
                         }
                         
-//                        NavigationLink(destination: EmotionHistoryView()) {
-//                            TopicCard(title: "Emotion Diary", backgroundColor: Color("purple"), imageName: "domestic_violence")
-//                        }
+                        NavigationLink(destination: EmotionHistoryView()) {
+                            TopicCard(title: "Emotion Diary", backgroundColor: Color("dark_red"), imageName: "domestic_violence")
+                        }
                         
                         NavigationLink(destination: ContactAndResource()) {
                             TopicCard(title: "Contacts and Resources", backgroundColor: Color("green"), imageName: "phone_icon")

@@ -4,7 +4,7 @@ struct CustomButtonQuiz: View {
     var number: String
     var action: () -> Void
     var gradientColors: [Color]
-    var borderColor: Color // New parameter for border color
+    var borderColor: Color
 
     var body: some View {
         Button(action: action) {
@@ -28,7 +28,7 @@ struct CustomButtonQuiz: View {
             .cornerRadius(20)
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
-                    .stroke(borderColor, lineWidth: 5) // Use the borderColor parameter
+                    .stroke(borderColor, lineWidth: 5)
             )
         }
     }

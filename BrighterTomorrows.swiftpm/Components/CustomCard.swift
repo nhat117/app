@@ -48,7 +48,7 @@ struct ContentView_Previews: PreviewProvider {
             CustomCard(title: "Love", backgroundColor: .pink, imageName: "heart")
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-        .frame(height: 520) // Adjust the height as needed
+        .frame(height: 520) 
     }
 }
 

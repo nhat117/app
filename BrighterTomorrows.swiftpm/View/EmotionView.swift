@@ -23,35 +23,37 @@ struct EmotionView: View {
                 )
                 .shadow(radius: 3)
         }
+        .frame(width: 44, height: 44) 
         .padding(.vertical)
     }
-    
+
+    var addButton: some View {
+        Button(action: {
+            saveCurrentEmotion(emotionName: selectedEmotion)
+            presentationMode.wrappedValue.dismiss()
+            
+        }) {
+            Image(systemName: "plus")
+                .font(.system(size: 22))
+                .foregroundColor(.black)
+                .padding(.all, 8)
+                .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 2))
+                .shadow(radius: 3)
+        }
+        .frame(width: 44, height: 44)
+        .padding()
+    }
     var body: some View {
         ZStack (alignment: .topLeading){
             CustomColor().backgroundColor
                 .edgesIgnoringSafeArea(.all)
-            HStack {
-                Spacer()
-                
-                Button(action: {
-               
-                    presentationMode.wrappedValue.dismiss()
-                    
-                }) {
-                    Image(systemName: "plus")
-                        .font(.system(size: 24))
-                        .foregroundColor(.black)
-                        .padding()
-                        .background(Color.white) // Semi-transparent background
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 2))
-                        .shadow(radius: 3)
-                }
-                .padding()
-            }
+        
             VStack {
-                Color.clear.frame(height: 90)
+                Color.clear.frame(height: 40)
                 Text("How do you feel today ?").font(.system(size: 30, weight: .bold))
+                Spacer()
                 TabView {
                     CustomCard(title: "Surprise", backgroundColor: .orange, imageName: "bell").onTapGesture {
                         selectedEmotion = "Surprise"
@@ -67,7 +69,9 @@ struct EmotionView: View {
                     }
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-                .frame(height: 520) // Adjust the height as needed
+                .frame(height: 520)
+                
+                Spacer()
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -76,7 +80,13 @@ struct EmotionView: View {
                 HStack(spacing: 20) {
                     backButton
                 }
+            }   
+            ToolbarItem(placement: .topBarTrailing) {
+                HStack(spacing: 20) {
+                    addButton
+                }
             }
+            
         }
     }
     func saveCurrentEmotion(emotionName: String) {
