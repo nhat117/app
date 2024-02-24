@@ -4,7 +4,7 @@ struct CustomCard: View {
     var title: String
     var backgroundColor: Color
     var imageName: String // Use this if you have an image to display
-    
+
     var body: some View {
         VStack {
             Image(systemName: imageName) // Replace with your own image handling

@@ -2,7 +2,7 @@ import SwiftUI
 struct EmotionEntry: Codable, Identifiable {
     var id: UUID = UUID()
     let emotionName: String
-    let date: Date
+    var date: Date = Date()
 }
 
 struct Emotion {
