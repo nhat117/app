@@ -33,10 +33,9 @@ struct TopicCard: View {
             
             Image(imageName)
                 .resizable()
-                .aspectRatio(contentMode: .fill)
+                .aspectRatio(contentMode: .fit)
                 .frame(width: 100, height: 150)
                 .foregroundColor(.white)
-                .padding(.horizontal)
         }
         .frame(width: UIScreen.main.bounds.width - 50, height: 120)
         .background(backgroundColor)

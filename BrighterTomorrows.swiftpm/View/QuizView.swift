@@ -6,7 +6,7 @@ struct QuizView: View {
     @AppStorage("srcView") var username: String = "1"
     @Binding var isPresenting: Bool
     // Define the question and answers
-    var quizData: QuizData // Accepting QuizData as input
+    var quizData: QuizData
 
         // State variables for dynamic content and user interaction
     @State private var currentQuestionIndex = 0

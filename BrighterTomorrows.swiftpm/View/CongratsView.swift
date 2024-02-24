@@ -2,7 +2,7 @@ import SwiftUI
 
 struct CongratsView: View {
     @Environment(\.dismiss) var dismiss
-    @AppStorage("username") var username: String = "Anonymous"
+    @AppStorage("username") var username: String?
     @AppStorage("srcView") var srcView: String = "1"
     @Binding var isPresenting: Bool
     let backgroundColor = CustomColor().backgroundColor
@@ -39,7 +39,7 @@ struct CongratsView: View {
                     
                     // Text and image inside the rounded rectangle
                     VStack {
-                        Text("Good job, \(username)!")
+                        Text("Good job, \(username ?? "John Doe")!")
                             .font(.system(size: 30))
                             .padding(.top)
                         Image("congrats") 
