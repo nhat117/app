@@ -87,21 +87,6 @@ struct PlaygroundMapView: View {
                         .position(x: geometry.size.width - 160, y: geometry.size.height - 200)
                 }
 
-                Button(action: { // Back Button
-                    // Action for the back button
-                }) {
-                    Image(systemName: "arrow.left")
-                        .font(.system(size: 24))
-                        .foregroundColor(.black)
-                        .padding()
-                        .background(Color.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 2))
-                        .shadow(radius: 3)
-                }
-                .padding([.top, .leading], 30)
-                .position(x: geometry.safeAreaInsets.leading + 40, y: geometry.safeAreaInsets.top + 50)
-                
                 if showCongratsView { // Congrats View
                     CongratsView(isPresenting: $isPresenting)
                 }
