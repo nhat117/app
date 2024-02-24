@@ -23,7 +23,7 @@ struct EmotionView: View {
                 )
                 .shadow(radius: 3)
         }
-        .frame(width: 44, height: 44) // Fixed size
+        .frame(width: 44, height: 44) 
         .padding(.vertical)
     }
 
@@ -37,12 +37,12 @@ struct EmotionView: View {
                 .font(.system(size: 22))
                 .foregroundColor(.black)
                 .padding(.all, 8)
-                .background(Color.white) // Semi-transparent background
+                .background(Color.white)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.black, lineWidth: 2))
                 .shadow(radius: 3)
         }
-        .frame(width: 44, height: 44) // Fixed size to match backButton
+        .frame(width: 44, height: 44)
         .padding()
     }
     var body: some View {
@@ -69,7 +69,7 @@ struct EmotionView: View {
                     }
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-                .frame(height: 520) // Adjust the height as needed
+                .frame(height: 520)
                 
                 Spacer()
             }

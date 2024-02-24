@@ -30,7 +30,7 @@ struct AppInfoView: View {
             Form {
                 Section {
                     Text("""
-                        The app is designed to educate children about domestic violence and also raise awareness in protecting themselves from maltreatments.
+                        The app is designed to educate children in protecting themselves from maltreatments.
                         """)
                     Text("\"I once was a victim, now I am a survivor!\"")
                         .italic()

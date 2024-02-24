@@ -1,10 +1,3 @@
-//
-//  Color.swift
-//  BrighterTomorrows
-//
-//  Created by Nhat Bui Minh on 2/17/24.
-//
-
 import SwiftUI
 struct CustomColor {
     let backgroundColor = Color(red: 76 / 255, green: 198 / 255, blue: 222 / 255)
