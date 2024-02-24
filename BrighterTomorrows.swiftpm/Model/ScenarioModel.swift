@@ -9,9 +9,9 @@ struct ScenarioData {
     let scenarios1 = [
         Scenario(id: 1,
                  title: "Personal Boundaries",
-                 description: "Alex is playing in the park when another child asks about something personal.",
+                 description: "Alex playing in the park when another child asks about something personal.",
                  choices:
-                    "Feel uncomfortable and decide to find a trusted adult to talk to."),
+                    " Alex Feel uncomfortable and decide to talk to a trusted adult."),
         
         Scenario(id: 2,
                  title: "Good vs. Bad Secrets",

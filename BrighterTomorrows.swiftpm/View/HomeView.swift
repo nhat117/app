@@ -14,6 +14,10 @@ enum Theme {
 struct HomeView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
+    @State private var isPresentingQuiz = false
+    @State private var isPresentingLesson = false
+    @State private var username = "Iris"
+    
     @AppStorage("username") var currentUserName: String?
         
 //    var backButton: some View {
@@ -64,20 +68,39 @@ struct HomeView: View {
                     .padding(.horizontal, 30)
                     
                     VStack {
-                        NavigationLink(destination: 
-                                        QuizView(quizData: QuizData())) {
-                            TopicCard(title: "Domestic Violence", backgroundColor: Color("red"), imageName: "domestic_violence", topicDesc: "Explore how children are being abused and its preventions")
+                        NavigationStack {
+                                   if !isPresentingQuiz {
+                                       // Your HomeView content
+                                       TopicCard(title: "Quiz", backgroundColor: Color("red"), imageName: "domestic_violence").onTapGesture {
+                                           isPresentingQuiz = true
+                                       }
+                                   } 
+                        }.fullScreenCover( isPresented: $isPresentingQuiz){
+                            QuizView(isPresenting: $isPresentingQuiz, quizData: QuizData())
+                        }
+ 
+                        
+                        
+                        NavigationStack {
+                                   if !isPresentingLesson {
+                                       // Your HomeView content
+                                       TopicCard(title: "Lesson", backgroundColor: Color("blue"), imageName: "domestic_violence").onTapGesture {
+                                           isPresentingLesson = true
+                                       }
+                                   }
+                        }.fullScreenCover( isPresented: $isPresentingLesson){
+                            PlaygroundMapView(isPresenting: $isPresentingLesson)
                         }
                         
                         NavigationLink(destination: EmotionView()) {
-                            TopicCard(title: "Safety Planning", backgroundColor: Color("blue"), imageName: "domestic_violence")
-                        }
-                        
-                        NavigationLink(destination: QuizView(quizData: QuizData())) {
                             TopicCard(title: "Enquire User emotion", backgroundColor: Color("purple"), imageName: "domestic_violence")
                         }
                         
-                        NavigationLink(destination: QuizView(quizData: QuizData())) {
+//                        NavigationLink(destination: EmotionHistoryView()) {
+//                            TopicCard(title: "Emotion Diary", backgroundColor: Color("purple"), imageName: "domestic_violence")
+//                        }
+                        
+                        NavigationLink(destination: QuizView(isPresenting: $isPresentingQuiz, quizData: QuizData())) {
                             TopicCard(title: "Contacts and Resources", backgroundColor: Color("green"), imageName: "domestic_violence")
                         }
                     }
