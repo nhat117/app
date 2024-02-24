@@ -39,9 +39,8 @@ struct AchievementCard: View {
 struct AchievementView_Previews: PreviewProvider {
     static var previews: some View {
         TabView {
-            AchievementCard(title: "Quiz 1", backgroundColor: .white, imageName: "quiz1") // Use your actual image name
-            AchievementCard(title: "Quiz 2", backgroundColor: .white, imageName: "quiz2")
-            AchievementCard(title: "Love", backgroundColor: .white, imageName: "lesson")
+            AchievementCard(title: "Lesson", backgroundColor: .white, imageName: "quiz1") // Use your actual image name
+            AchievementCard(title: "Quiz", backgroundColor: .white, imageName: "quiz2")
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
         .frame(height: 520) // Adjust the height as needed

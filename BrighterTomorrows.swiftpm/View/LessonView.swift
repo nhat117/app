@@ -5,23 +5,23 @@ struct PlaygroundMapView: View {
     @State private var messageText: String = "" // Message for the chat bubble
     @State private var showMessage: Bool = false // Controls visibility of the message and bubble
     @State private var titleText: String = "Tap on a pin to explore!" // Default title text
- 
+    @State private var tappedFeatures: Set<PlaygroundFeature> = [] // Track tapped features
+    @State private var showCongratsView: Bool = false // Control the presentation of CongratsView
+    @Binding var isPresenting :Bool
     let lesson = ScenarioData().scenarios1
-    // Define a data structure for map pin information
+
     struct MapPin {
         var feature: PlaygroundFeature
         var xMultiplier: CGFloat
         var yMultiplier: CGFloat
     }
 
-    // Create an array of map pins
     let mapPins: [MapPin] = [
         MapPin(feature: .sandbox, xMultiplier: 0.2, yMultiplier: 0.33),
         MapPin(feature: .swings, xMultiplier: 0.23, yMultiplier: 0.46),
         MapPin(feature: .picnicArea, xMultiplier: 0.4, yMultiplier: 0.67),
         MapPin(feature: .slide, xMultiplier: 0.5, yMultiplier: 0.6),
         MapPin(feature: .parking, xMultiplier: 0.5, yMultiplier: 0.5),
-//        MapPin(feature: ., xMultiplier: 0.6, yMultiplier: 0.3)
         // Add more pins as needed
     ]
 
@@ -29,7 +29,7 @@ struct PlaygroundMapView: View {
         GeometryReader { geometry in
             ZStack {
                 Color("primary") // Use a semi-transparent primary color for the background
-                              .edgesIgnoringSafeArea(.all) // Extend the color to the edges of the screen
+                    .edgesIgnoringSafeArea(.all) // Extend the color to the edges of the screen
                 Image("playground_map") // Background image of the playground map
                     .resizable()
                     .scaledToFit()
@@ -55,7 +55,11 @@ struct PlaygroundMapView: View {
                         .position(x: geometry.size.width * pin.xMultiplier, y: geometry.size.height * pin.yMultiplier)
                         .onTapGesture {
                             self.selectedFeature = pin.feature
-                                       self.updateContent(for: pin.feature)
+                            self.updateContent(for: pin.feature)
+                            self.tappedFeatures.insert(pin.feature) // Add the tapped feature to the set
+                            if self.tappedFeatures.count == self.mapPins.count { // Check if all pins have been tapped
+                                self.showCongratsView = true // Show CongratsView
+                            }
                         }
                 }
 
@@ -96,34 +100,25 @@ struct PlaygroundMapView: View {
                         .shadow(radius: 3)
                 }
                 .padding([.top, .leading], 30)
-                .position(x: geometry.safeAreaInsets.leading + 40, y: geometry.safeAreaInsets.top - 40)
-
+                .position(x: geometry.safeAreaInsets.leading + 40, y: geometry.safeAreaInsets.top + 50)
+                
+                if showCongratsView { // Congrats View
+                    CongratsView(isPresenting: $isPresenting)
+                }
             }
         }
     }
-    
-    
 
-    private func updateTitle(for feature: PlaygroundFeature) { // Function to update the title text
-        switch feature {
-        case .sandbox:
-            titleText = "Sandbox: Let's build some castles!"
-        // Add cases for other features with appropriate messages
-        default:
-            titleText = "Explore the playground!"
-        }
-    }
-    
     private func updateContent(for feature: PlaygroundFeature) {
-            if let scenario = lesson.first(where: { $0.id == feature.rawValue }) {
-                self.titleText = scenario.description
-                self.messageText = scenario.choices
-                self.showMessage = true
-            } else {
-                self.titleText = "Explore the playground!"
-                self.showMessage = false
-            }
+        if let scenario = lesson.first(where: { $0.id == feature.rawValue }) {
+            self.titleText = scenario.description
+            self.messageText = scenario.choices
+            self.showMessage = true
+        } else {
+            self.titleText = "Explore the playground!"
+            self.showMessage = false
         }
+    }
 }
 
 enum PlaygroundFeature: Int, CustomStringConvertible {
@@ -141,9 +136,10 @@ enum PlaygroundFeature: Int, CustomStringConvertible {
     }
 }
 
+// Your CongratsView code should be here
 
-struct PlaygroundMapView_Previews: PreviewProvider { // Preview provider
+struct PlaygroundMapView_Previews: PreviewProvider {
     static var previews: some View {
-        PlaygroundMapView()
+        PlaygroundMapView(isPresenting: .constant(true))
     }
 }

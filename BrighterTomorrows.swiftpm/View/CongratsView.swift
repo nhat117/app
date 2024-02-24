@@ -1,11 +1,10 @@
 import SwiftUI
 
 struct CongratsView: View {
-    @Binding var name: String
-    @Binding var srcScreen: String
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @AppStorage("username") var username: String = "Anonymous"
     @AppStorage("srcView") var srcView: String = "1"
+    @Binding var isPresenting: Bool
     let backgroundColor = CustomColor().backgroundColor
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -15,7 +14,7 @@ struct CongratsView: View {
             
             Button(action: {
                 // Action for the back button
-                presentationMode.wrappedValue.dismiss()
+                
             }) {
                 Image(systemName: "arrow.left") // Use a system image for the back arrow
                     .font(.system(size: 24)) // Set the font size to make the arrow larger
@@ -48,7 +47,10 @@ struct CongratsView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 300)
-                        CustomButton(action: {}).padding()
+                        CustomButton(action: {
+                          dismiss()
+                            isPresenting = false
+                        }).padding()
                     }
                 
                     Image("ribbon") // Use the correct image name here
@@ -74,6 +76,6 @@ struct CongratsView: View {
 // Preview provider for SwiftUI previews in Xcode
 struct CongratsView_Previews: PreviewProvider {
     static var previews: some View {
-        CongratsView(name: .constant("Liam"), srcScreen: .constant("Quiz 1"))
+        CongratsView(isPresenting: .constant(true))
     }
 }
