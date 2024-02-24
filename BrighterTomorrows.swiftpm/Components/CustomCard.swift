@@ -3,15 +3,26 @@ import SwiftUI
 struct CustomCard: View {
     var title: String
     var backgroundColor: Color
-    var imageName: String
+    var imageName: String // Use this if you have an image to display
+    var useSystemImage: Bool = true
 
     var body: some View {
         VStack {
-            Image(systemName: imageName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 100, height: 100)
-                .foregroundColor(.white)
+            if useSystemImage {
+                Image(systemName: imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100, height: 100)
+                    .foregroundColor(.white)
+            } else {
+                Image(imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 250, height: 250)
+                    .clipShape(RoundedRectangle(cornerRadius: 25.0))
+            }
+            
+            
             Text(title)
                 .font(.title)
                 .foregroundColor(.white)
@@ -30,6 +41,7 @@ struct CustomCard: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         TabView {
+            CustomCard(title: "National Child Helpline", backgroundColor: .orange, imageName: "child_helpline_111_vietnam", useSystemImage: false)
             CustomCard(title: "Surprise", backgroundColor: .orange, imageName: "bell")
             CustomCard(title: "Happiness", backgroundColor: .yellow, imageName: "sun.max")
             CustomCard(title: "Sadness", backgroundColor: .blue, imageName: "cloud.rain")
