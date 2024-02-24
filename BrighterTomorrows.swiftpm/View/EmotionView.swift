@@ -4,7 +4,7 @@ struct EmotionView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
     @State private var sliderValue: Double = 50
-
+    @State private var selectedEmotion: String = "Happiness"
     var backButton: some View {
         Button(action: {
             withAnimation() {
@@ -27,16 +27,18 @@ struct EmotionView: View {
     }
     
     var body: some View {
-        ZStack (alignment: .topLeading){ // Use a ZStack to ensure the background covers the entire screen
+        ZStack (alignment: .topLeading){
             CustomColor().backgroundColor
-                .edgesIgnoringSafeArea(.all) // Make the background extend to the edges
+                .edgesIgnoringSafeArea(.all)
             HStack {
                 Spacer()
                 
                 Button(action: {
-                    // Action for the add button
+               
+                    presentationMode.wrappedValue.dismiss()
+                    
                 }) {
-                    Image(systemName: "camera")
+                    Image(systemName: "plus")
                         .font(.system(size: 24))
                         .foregroundColor(.black)
                         .padding()
@@ -51,10 +53,18 @@ struct EmotionView: View {
                 Color.clear.frame(height: 90)
                 Text("How do you feel today ?").font(.system(size: 30, weight: .bold))
                 TabView {
-                    CustomCard(title: "Surprise", backgroundColor: .orange, imageName: "bell") // Use your actual image name
-                    CustomCard(title: "Happiness", backgroundColor: .yellow, imageName: "sun.max")
-                    CustomCard(title: "Sadness", backgroundColor: .blue, imageName: "cloud.rain")
-                    CustomCard(title: "Love", backgroundColor: .pink, imageName: "heart")
+                    CustomCard(title: "Surprise", backgroundColor: .orange, imageName: "bell").onTapGesture {
+                        selectedEmotion = "Surprise"
+                    }
+                    CustomCard(title: "Happiness", backgroundColor: .yellow, imageName: "sun.max").onTapGesture {
+                        selectedEmotion = "Happiness"
+                    }
+                    CustomCard(title: "Sadness", backgroundColor: .blue, imageName: "cloud.rain").onTapGesture {
+                        selectedEmotion = "Sadness"
+                    }
+                    CustomCard(title: "Love", backgroundColor: .pink, imageName: "heart").onTapGesture {
+                        selectedEmotion = "Love"
+                    }
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                 .frame(height: 520) // Adjust the height as needed
@@ -69,11 +79,12 @@ struct EmotionView: View {
             }
         }
     }
+    func saveCurrentEmotion(emotionName: String) {
+        let newEntry = EmotionEntry(emotionName: emotionName)
+        EmotionHistoryManager.shared.saveEmotionEntry(newEntry)
+    }
 }
 
-// Assuming CustomColor is a struct you've defined that contains a 'backgroundColor' property.
-// If 'CustomColor().backgroundColor' is not a valid color or CustomColor is not defined,
-// replace it with a direct SwiftUI Color, e.g., Color.blue or Color(red: 1.0, green: 0.5, blue: 0.0).
 
 struct EmotionView_Previews: PreviewProvider {
     static var previews: some View {

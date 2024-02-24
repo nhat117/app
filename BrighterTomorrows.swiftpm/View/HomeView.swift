@@ -69,7 +69,7 @@ struct HomeView: View {
                         NavigationStack {
                                    if !isPresentingQuiz {
                                        // Your HomeView content
-                                       TopicCard(title: "Domestic Violence", backgroundColor: Color("red"), imageName: "domestic_violence", topicDesc: "Explore how children are being abused and its preventions").onTapGesture {
+                                       TopicCard(title: "Quiz", backgroundColor: Color("red"), imageName: "domestic_violence").onTapGesture {
                                            isPresentingQuiz = true
                                        }
                                    } 
@@ -82,7 +82,7 @@ struct HomeView: View {
                         NavigationStack {
                                    if !isPresentingLesson {
                                        // Your HomeView content
-                                       TopicCard(title: "Safety Planning", backgroundColor: Color("blue"), imageName: "domestic_violence").onTapGesture {
+                                       TopicCard(title: "Lesson", backgroundColor: Color("blue"), imageName: "domestic_violence").onTapGesture {
                                            isPresentingLesson = true
                                        }
                                    }
@@ -90,9 +90,13 @@ struct HomeView: View {
                             PlaygroundMapView(isPresenting: $isPresentingLesson)
                         }
                         
-                        NavigationLink(destination: QuizView(isPresenting: $isPresentingQuiz, quizData: QuizData())) {
+                        NavigationLink(destination: EmotionView()) {
                             TopicCard(title: "Enquire User emotion", backgroundColor: Color("purple"), imageName: "domestic_violence")
                         }
+                        
+//                        NavigationLink(destination: EmotionHistoryView()) {
+//                            TopicCard(title: "Emotion Diary", backgroundColor: Color("purple"), imageName: "domestic_violence")
+//                        }
                         
                         NavigationLink(destination: QuizView(isPresenting: $isPresentingQuiz, quizData: QuizData())) {
                             TopicCard(title: "Contacts and Resources", backgroundColor: Color("green"), imageName: "domestic_violence")
