@@ -4,6 +4,11 @@ import Vortex
 struct SetupSuccessView: View {
     @State private var offset: CGFloat = (-UIScreen.main.bounds.height)
     
+    // Storage
+    @AppStorage("username") var currentUserName: String?
+    @AppStorage("age") var currentUserAge: String?
+    @AppStorage("login_state") var signedInSession: Bool = false
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -66,7 +71,7 @@ struct SetupSuccessView: View {
                             .font(.title2)
                             .foregroundStyle(.white)
                         
-                        Text("Iris")
+                        Text(currentUserName ?? "John Doe")
                             .font(.largeTitle)
                             .foregroundStyle(.white)
                             .fontWeight(.bold)

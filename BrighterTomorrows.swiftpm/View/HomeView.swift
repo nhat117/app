@@ -1,10 +1,3 @@
-//
-//  SwiftUIView.swift
-//  
-//
-//  Created by Trí Lai on 18/02/2024.
-//
-
 import SwiftUI
 
 enum Theme {
@@ -14,10 +7,12 @@ enum Theme {
 struct HomeView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
+    @AppStorage("username") var currentUserName: String?
+
     @State private var isPresentingQuiz = false
     @State private var isPresentingLesson = false
-    @State private var username = "Iris"
     
+        
 //    var backButton: some View {
 //        Button(action: {
 //            withAnimation() {
@@ -49,7 +44,7 @@ struct HomeView: View {
                                 .foregroundStyle(Color.white)
                                 .font(.system(size: 28, weight: .semibold))
 
-                            Text(username.uppercased())
+                            Text(currentUserName?.split(separator: " ").last?.uppercased() ?? "John Doe")
                                 .foregroundStyle(Color("text_color"))
                                 .font(.system(size: 40, weight: .bold))
                         }

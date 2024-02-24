@@ -48,7 +48,7 @@ struct WelcomeView: View {
             
             Spacer(minLength: 130)
             
-            NavigationLink(destination: NameAskingView(), label: {
+            NavigationLink(destination: SetupSwitcher(loginSession: false, currentUserName: nil, currentUserAge: nil), label: {
                 Image(systemName: "arrow.right.circle")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
