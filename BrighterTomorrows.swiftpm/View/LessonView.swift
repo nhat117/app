@@ -7,6 +7,7 @@ struct PlaygroundMapView: View {
     @State private var titleText: String = "Tap on a pin to explore!" // Default title text
     @State private var tappedFeatures: Set<PlaygroundFeature> = [] // Track tapped features
     @State private var showCongratsView: Bool = false // Control the presentation of CongratsView
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Binding var isPresenting :Bool
     let lesson = ScenarioData().scenarios1
 
@@ -25,7 +26,30 @@ struct PlaygroundMapView: View {
         // Add more pins as needed
     ]
 
+    var backButton: some View {
+        Button(action: {
+            withAnimation() {
+                presentationMode.wrappedValue.dismiss()
+            }
+        }) {
+            Image(systemName: "arrow.left")
+                .font(.system(size: 22))
+                .foregroundColor(.black)
+                .padding(.all, 8)
+                .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.black, lineWidth: 2)
+                )
+                .shadow(radius: 3)
+        }
+        .frame(width: 44, height: 44) // Fixed size
+        .padding(.vertical)
+    }
+
     var body: some View {
+        
         GeometryReader { geometry in
             ZStack {
                 Color("primary") // Use a semi-transparent primary color for the background
@@ -39,13 +63,13 @@ struct PlaygroundMapView: View {
                         self.showMessage = false
                         self.titleText = "Tap on a pin to explore"
                     }
-
+                
                 Text(titleText) // Title Text
                     .font(.title)
                     .padding([.top, .leading, .trailing], 20)
                     .foregroundColor(Color.black)
                     .position(x: geometry.size.width / 2, y: geometry.safeAreaInsets.top + 50)
-
+                
                 ForEach(mapPins.indices, id: \.self) { index in // Iterate over the map pins
                     let pin = mapPins[index]
                     Image("map_pin")
@@ -62,37 +86,40 @@ struct PlaygroundMapView: View {
                             }
                         }
                 }
-
+                
                 Image("mascot") // Mascot image in the bottom right corner
                     .resizable()
                     .scaledToFit()
                     .frame(height: 200)
                     .position(x: geometry.size.width - 80, y: geometry.size.height - 100)
-
+                
                 if showMessage { // Chat bubble and message
                     Image("bubble")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 190)
+                        .frame(width: 208)
                         .position(x: geometry.size.width - 160, y: geometry.size.height - 200)
-
+                    
                     Text(messageText)
                         .font(.caption)
                         .padding(10)
-                        .frame(width: 120)
+                        .frame(width: 118)
                         .multilineTextAlignment(.center)
                         .background(Color.white)
                         .cornerRadius(10)
                         .foregroundColor(Color.black)
                         .position(x: geometry.size.width - 160, y: geometry.size.height - 200)
                 }
-
+                
                 if showCongratsView { // Congrats View
                     CongratsView(isPresenting: $isPresenting)
                 }
+                
             }
         }
+    
     }
+    
 
     private func updateContent(for feature: PlaygroundFeature) {
         if let scenario = lesson.first(where: { $0.id == feature.rawValue }) {

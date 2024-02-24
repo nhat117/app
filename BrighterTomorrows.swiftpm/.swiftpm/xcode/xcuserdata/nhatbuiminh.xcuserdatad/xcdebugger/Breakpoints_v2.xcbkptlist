@@ -20,5 +20,53 @@
             landmarkType = "14">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1B09FAC0-288C-41C4-8DC4-50BF122A2C4E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "View/LessonView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "1B09FAC0-288C-41C4-8DC4-50BF122A2C4E - fb132828d4816b6a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BrighterTomorrows.PlaygroundMapView.body.getter : some"
+                  moduleName = "BrighterTomorrows"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nhatbuiminh/Desktop/BrighterTomorrows/BrighterTomorrows.swiftpm/View/LessonView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "132">
+               </Location>
+               <Location
+                  uuid = "1B09FAC0-288C-41C4-8DC4-50BF122A2C4E - cf3a04ec6b705bca"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (SwiftUI.GeometryProxy) -&gt; &lt;&lt;opaque return type of SwiftUI.View.navigationBarTitle(_: SwiftUI.Text, displayMode: SwiftUI.NavigationBarItem.TitleDisplayMode) -&gt; some&gt;&gt;.0 in BrighterTomorrows.PlaygroundMapView.body.getter : some"
+                  moduleName = "BrighterTomorrows"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nhatbuiminh/Desktop/BrighterTomorrows/BrighterTomorrows.swiftpm/View/LessonView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "540">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
