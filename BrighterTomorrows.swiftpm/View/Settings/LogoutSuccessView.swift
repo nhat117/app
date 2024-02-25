@@ -1,36 +1,18 @@
 import SwiftUI
 
-struct WelcomeView: View {
-    @State private var showSheet: Bool = false
-    @State private var animatingButton: Bool = false
-
+struct LogoutSuccessView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                HStack {
-                    Spacer()
-                    Button {
-                        showSheet.toggle()
-                    } label: {
-                        Image(systemName: "info.circle")
-                            .font(.system(size: 30))
-                            .padding(.horizontal)
-                            .foregroundStyle(Color("primary"))
-                    }
-                    .sheet(isPresented: $showSheet) {
-                        AppInfoView()
-                    }
-                }
-                
                 Spacer()
                 
-                Image("welcome_view_image")
+                Image("waving_hand")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 300, height: 300)
                     .transition(.move(edge: .bottom))
                 
-                Text("It's time to stop children from being sexually abuse")
+                Text("COME BACK SOON")
                     .font(.system(size: 24))
                     .fontWeight(.heavy)
                     .padding()
@@ -38,7 +20,7 @@ struct WelcomeView: View {
                     .foregroundStyle(Color("primary"))
                     .transition(.move(edge: .bottom))
 
-                Text("Empathy is key when addressing sexually abuse in any form, whether physical or emotional")
+                Text("It's sad to see you leave but we hope that you have meaningful journey with us.")
                     .padding(.horizontal)
                     .multilineTextAlignment(.center)
                     .foregroundStyle(Color("caption_color"))
@@ -49,25 +31,18 @@ struct WelcomeView: View {
             
             Spacer(minLength: 130)
             
-            NavigationLink(destination: SetupSwitcher(), label: {
+            NavigationLink(destination: WelcomeView(), label: {
                 Image(systemName: "arrow.right.circle")
                     .font(.system(size: 40))
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 30)
                     .foregroundStyle(Color("primary"))
-                    .opacity(animatingButton ? 1.0 : 0.7)
-                    .scaleEffect(animatingButton ? 1.5 : 1.0)
             })
-            .onAppear() {
-                withAnimation(.easeInOut(duration: 1).repeatForever()) {
-                    animatingButton.toggle()
-                }
-            }
         }
         .navigationBarBackButtonHidden(true)
     }
 }
 
 #Preview {
-    WelcomeView()
+    LogoutSuccessView()
 }

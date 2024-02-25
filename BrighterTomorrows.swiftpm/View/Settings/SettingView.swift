@@ -5,6 +5,7 @@ struct SettingView: View {
 
     @AppStorage("username") private var username: String?
     @AppStorage("age") private var age: String?
+    @AppStorage("login_state") var loginSession: Bool = false
     
     @State private var emotionEntries: [EmotionEntry] = []
 
@@ -90,7 +91,17 @@ struct SettingView: View {
                         // About Us
                         NavigationLink(destination: AboutUsView()) {
                             SettingItem(imageIcon: "questionmark.circle", useSystemImage: true, contactName: "About us")
+                        }        
+                        
+                        // Logout
+                        NavigationLink(destination: LogoutSuccessView()) {
+                            SettingItem(imageIcon: "rectangle.portrait.and.arrow.right", useSystemImage: true, contactName: "Logout", role: "logout")
                         }
+                        .simultaneousGesture(TapGesture().onEnded {
+                            self.username = nil
+                            self.age = nil
+                            self.loginSession = false
+                        })
                     }
                     .offset(y: -60)
                 } // VStack
@@ -118,6 +129,7 @@ struct SettingItem: View {
     @State var imageIcon: String
     var useSystemImage: Bool = false
     @State var contactName: String
+    var role: String?
     
     var body: some View {
         VStack {
@@ -127,36 +139,35 @@ struct SettingItem: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 35)
-                        .padding(.leading, 30)
-                        .foregroundStyle(Color("text_color"))
-                    
+                        .padding(.leading, (role?.lowercased() != "logout") ? 20 : 22)
+
                 } else {
                     Image(imageIcon)
                         .resizable()
                         .scaledToFit()
                         .frame(width: 35)
-                        .padding(.leading, 30)
-                        .foregroundStyle(Color("text_color"))
+                        .padding(.leading, (role?.lowercased() != "logout") ? 20 : 22)
                 }
                 
                 Text(contactName)
                     .font(.system(size: 18, weight: .bold))
-                    .foregroundStyle(Color("text_color"))
-                
+
                 Spacer()
                 
-                Image(systemName: "arrow.right.circle.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 35)
-                    .padding(.trailing, 30)
-                    .foregroundStyle(Color("text_color"))
+                if role?.lowercased() != "logout" {
+                    Image(systemName: "arrow.right.circle.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 35)
+                        .padding(.trailing, 30)
+                }
             }
-            .padding(.horizontal, 20)
+            .foregroundStyle((role != "logout") ? Color("text_color") : .red)
+            .padding(.horizontal, (role?.lowercased() != "logout") ? 20 : 25)
             
             Divider()
              .frame(height: 4)
-             .padding(.horizontal, 10)
+             .padding(.horizontal, 40)
         }
     }
 }

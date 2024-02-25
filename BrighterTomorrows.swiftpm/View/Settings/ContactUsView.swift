@@ -36,9 +36,9 @@ struct ContactUsView: View {
                     .foregroundStyle(Color("text_color_secondary"))
                     .font(.system(size: 16, weight: .semibold))
                             
-                ContactCard(imageIcon: "phone.fill", useSystemImage: true, contactName: "Phone number", contactInfo: "(+84) 069 123 456")
+                ContactUsCard(imageIcon: "phone.fill", useSystemImage: true, contactName: "Phone number", contactInfo: "(+84) 069 123 456")
                 
-                ContactCard(imageIcon: "envelope.fill", useSystemImage: true, contactName: "Email address", contactInfo: "s3878174@rmit.edu.vn")
+                ContactUsCard(imageIcon: "envelope.fill", useSystemImage: true, contactName: "Email address", contactInfo: "s3878174@rmit.edu.vn")
                 
                 ContactGroupCard(contactList: myContact, contactGroupName: "Social Media")
                 
