@@ -19,7 +19,7 @@ struct HomeView: View {
                     .ignoresSafeArea()
                 
                 VStack {
-                    HStack {                                
+                    HStack {
                         VStack(alignment: .leading) {
                             Text("HI,")
                                 .foregroundStyle(Color.white)
@@ -41,7 +41,7 @@ struct HomeView: View {
                     }
                     .padding(.horizontal, 30)
                     
-                    ScrollView {
+                    ScrollView (showsIndicators: false){
                         NavigationStack {
                            if !isPresentingQuiz {
                                TopicCard(title: "Quiz", backgroundColor: Color("red"), imageName: "quiz_icon")
@@ -62,7 +62,7 @@ struct HomeView: View {
                         }.fullScreenCover( isPresented: $isPresentingLesson){
                             PlaygroundMapView(isPresenting: $isPresentingLesson)
 
-                                .navigationBarTitle("Title", displayMode: .inline) 
+                                .navigationBarTitle("Title", displayMode: .inline)
                         }
                         
                         NavigationLink(destination: EmotionView()) {

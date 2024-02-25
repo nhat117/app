@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Nhat Bui Minh on 2/20/24.
-//
-
 import Foundation
 
 struct User : Identifiable {

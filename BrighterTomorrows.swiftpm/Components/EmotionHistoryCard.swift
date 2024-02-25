@@ -1,12 +1,3 @@
-//
-//  SwiftUIView.swift
-//  
-//
-//  Created by Nhat Bui Minh on 2/24/24.
-//
-
-import SwiftUI
-
 import SwiftUI
 
 struct EmotionHistoryCard: View {
@@ -57,8 +48,6 @@ struct EmotionHistoryCard: View {
     
 }
 
-struct EmotionHistoryCard_Previews: PreviewProvider {
-    static var previews: some View {
-        EmotionHistoryCard(date: "SEP 12", emotionName: "Sadness")
-    }
+#Preview{
+    EmotionHistoryCard(date: "SEP 12", emotionName: "Sadness")
 }

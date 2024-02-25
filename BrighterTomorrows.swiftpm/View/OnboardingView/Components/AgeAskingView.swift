@@ -8,11 +8,7 @@ struct AgeAskingView: View {
         NavigationStack {
             VStack {
                 Spacer()
-
-                // Greeting message
                 Text("How about your ")
-                
-                // Check tappable text to show text field
                 if isTextClicked {
                     TextField("age", text: $age)
                         .frame(width: 150)
@@ -30,7 +26,6 @@ struct AgeAskingView: View {
                         .keyboardType(.numberPad)
                     
                 } else {
-                    // Show tappable text by default
                     Button(role: .none) {
                         withAnimation {
                             isTextClicked.toggle()
@@ -44,16 +39,15 @@ struct AgeAskingView: View {
                 }
                 
                 Spacer()
-                
-                // Check text field is fullfilled to move to next screen
                 if (!age.isEmpty) {
                     NavigationLink(destination: SetupSuccessView(), label: {
                         Text("Next")
                             .foregroundStyle(Color("secondary"))
-                            .font(.system(size: 28))
+                            .font(.system(size: 35))
+                            .padding()
 
                         Image(systemName: "arrow.right.circle")
-                            .resizable()
+                            .font(.system(size: 35))
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 30)
                             .foregroundStyle(Color("primary"))

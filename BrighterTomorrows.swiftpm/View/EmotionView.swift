@@ -94,8 +94,7 @@ struct EmotionView: View {
 }
 
 
-struct EmotionView_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview{
         EmotionView()
-    }
 }
+

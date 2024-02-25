@@ -1,9 +1,3 @@
-//
-//  Data.swift
-//  BrighterTomorrows
-//
-//  Created by Nhat Bui Minh on 2/14/24.
-//
 import Foundation
 
 struct Question {

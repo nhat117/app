@@ -39,5 +39,5 @@ struct TopicCard: View {
 }
 
 #Preview {
-    TopicCard(title: "Domestic Violence", backgroundColor: Color("red"), imageName: "domestic_violence", topicDesc: "Explore how children are being abused and its preventions")
+    TopicCard(title: "Sexually Abuse Children", backgroundColor: Color("red"), imageName: "domestic_violence", topicDesc: "Explore how children are being sexually abused and its preventions")
 }
