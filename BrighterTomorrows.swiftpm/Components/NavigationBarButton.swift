@@ -11,12 +11,16 @@
         - Incorporated best practices from "Hacking With Swift",
           https://www.hackingwithswift.com/ (accessed Feb. 22, 2023).
 */
-import Foundation
+import SwiftUI
 
-struct User : Identifiable {
-    let id = UUID()
-    let name : String
-    let age: Int
+struct NavigationBarButton: View {
+    var systemName: String
+    var action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: systemName)
+                .navigationButtonStyle()
+        }
+    }
 }
-
-

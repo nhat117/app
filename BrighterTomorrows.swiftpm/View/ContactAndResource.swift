@@ -1,30 +1,29 @@
-/*  Author: Bui Minh Nhat
+/*
+    Author: Bui Minh Nhat
     Email: s3878174@rmit.edu.vn
-    Created  date: 12/2/2023
+    Created date: 12/2/2023
     Last modified: 25/2/2023
-    Acknowledgement:
-        - The UI designs are inspired from:
-            “Children Learning App,” Dribbble,
- https://dribbble.com/shots/7265955-Children-Learning-App/attachments/222641?mode=media
-    (accessed Feb. 24, 2023).
-        - "Apple Documentation", Apple ,https://developer.apple.com/documentation/swiftui/     (accessed Feb. 22, 2023).
-        - "Hacking With Swift", Hacking With Swift, https://www.hackingwithswift.com/
-     (accessed Feb. 22, 2023).
+    Acknowledgements:
+        - Inspired by “Children Learning App” on Dribbble,
+          https://dribbble.com/shots/7265955-Children-Learning-App/attachments/222641?mode=media (accessed Feb. 24, 2023).
+        - Utilized "Apple Documentation" for SwiftUI guidance,
+          https://developer.apple.com/documentation/swiftui/ (accessed Feb. 22, 2023).
+        - Incorporated best practices from "Hacking With Swift",
+          https://www.hackingwithswift.com/ (accessed Feb. 22, 2023).
 */
 import SwiftUI
 
 struct ContactAndResource: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = ThemeEnum.darkMode  // User's theme preference
     
-    //Storage
-    @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
+    private var contactData: ContactResourceData = ContactResourceData()  // Data model containing the contact information
     
-    private var contactData: ContactResourceData = ContactResourceData()
-    
+    // Back button for navigation
     var backButton: some View {
         Button(action: {
             withAnimation() {
-                presentationMode.wrappedValue.dismiss()
+                presentationMode.wrappedValue.dismiss()  // Dismisses the current view
             }
         }) {
             Image(systemName: "arrow.left")
@@ -43,7 +42,7 @@ struct ContactAndResource: View {
     }
     
     var body: some View {
-        ZStack (alignment: .topLeading){
+        ZStack(alignment: .topLeading) {
             CustomColor().backgroundColor
                 .edgesIgnoringSafeArea(.all)
 
@@ -51,16 +50,19 @@ struct ContactAndResource: View {
                 Spacer()
                 Text("Emergency Contact")
                     .font(.system(size: 30, weight: .bold))
-                    .foregroundStyle(CustomColor().header)
+                    .foregroundStyle(CustomColor().header)  // Custom header style
+                
+                // Scrollable list of contact cards
                 ScrollView(showsIndicators: false) {
-                    ForEach(contactData.contactResourceData) {contact in
+                    ForEach(contactData.contactResourceData) { contact in
                         ContactCard(
                             name: contact.name,
                             image: contact.image,
                             address: contact.address,
                             desc: contact.desc,
-                            contactNumber: contact.contactNumber)
-                        .padding()
+                            contactNumber: contact.contactNumber
+                        )
+                        .padding()  // Provides padding around each contact card for better spacing
                     }
                 }
             }
@@ -69,13 +71,14 @@ struct ContactAndResource: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 HStack(spacing: 20) {
-                    backButton
+                    backButton  // Places the back button in the navigation bar
                 }
             }
         }
     }
 }
 
-#Preview {
-    ContactAndResource()
-}
+
+ #Preview {
+     ContactAndResource()
+ }
