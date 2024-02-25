@@ -11,7 +11,7 @@ struct TopicCard: View {
             VStack {
                 Text(title)
                     .foregroundStyle(Color.white)
-                    .font(.system(.title3, weight: .semibold))
+                    .font(.system(size: 25, weight: .semibold))
                     .multilineTextAlignment(.leading)
                 
                 Text(topicDesc ?? "")

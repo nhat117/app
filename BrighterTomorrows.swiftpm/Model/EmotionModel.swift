@@ -16,7 +16,7 @@ struct EmotionData {
         "Surprise": Emotion(name: "Surprise", color: .orange, imageName: "bell"),
         "Happiness": Emotion(name: "Happiness", color: .yellow, imageName: "sun.max"),
         "Sadness": Emotion(name: "Sadness", color: .blue, imageName: "cloud.rain"),
-        "Love": Emotion(name: "Love", color: .pink, imageName: "heart")
+        "Neutral": Emotion(name: "Neutral", color: .gray, imageName: "cloud")
     ]
     
     static func emotion(for name: String) -> Emotion? {

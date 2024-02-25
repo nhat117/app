@@ -61,7 +61,8 @@ struct HomeView: View {
                            }
                         }.fullScreenCover( isPresented: $isPresentingLesson){
                             PlaygroundMapView(isPresenting: $isPresentingLesson)
-                                .navigationBarTitle("Title", displayMode: .inline)
+
+                                .navigationBarTitle("Title", displayMode: .inline) 
                         }
                         
                         NavigationLink(destination: EmotionView()) {
