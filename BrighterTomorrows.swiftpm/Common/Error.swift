@@ -34,7 +34,7 @@ enum CustomError: Error, LocalizedError {
             return "Age should less than 25."
         
         case .ageTooYoung:
-            return "Age should larger than 10."
+            return "Age should larger than 6."
         }
     }
 }

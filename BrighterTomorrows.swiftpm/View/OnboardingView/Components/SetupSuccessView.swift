@@ -34,7 +34,7 @@ struct SetupSuccessView: View {
                         
                         // Two cirle images
                         HStack(spacing: 4) {
-                            Image("tri-avatar")
+                            Image("default_user_avatar")
                                 .resizable()
                                 .scaledToFit()
                                 .clipShape(Circle())

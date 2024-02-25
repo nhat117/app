@@ -34,21 +34,21 @@ struct ContactAndResource: View {
 
             VStack {
                 TabView {
-                    ContactCard(
+                    ContactAndResourceCard(
                         name: contactData.contactResourceData[0].name,
                         image: contactData.contactResourceData[0].image,
                         address: contactData.contactResourceData[0].address, 
                         desc: contactData.contactResourceData[0].desc,
                         contactNumber: contactData.contactResourceData[0].contactNumber)
 
-                    ContactCard(
+                    ContactAndResourceCard(
                         name: contactData.contactResourceData[1].name,
                         image: contactData.contactResourceData[1].image,
                         address: contactData.contactResourceData[1].address,
                         desc: contactData.contactResourceData[1].desc,
                         contactNumber: contactData.contactResourceData[1].contactNumber)
 
-                    ContactCard(
+                    ContactAndResourceCard(
                         name: contactData.contactResourceData[2].name,
                         image: contactData.contactResourceData[2].image,
                         address: contactData.contactResourceData[2].address,

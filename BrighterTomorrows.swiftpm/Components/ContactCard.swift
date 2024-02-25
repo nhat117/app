@@ -1,72 +1,50 @@
 import SwiftUI
-import ExpandableText
 
 struct ContactCard: View {
-    @State var name: String?
-    @State var image: String?
-    @State var address: String?
-    @State var desc: String?
-    @State var contactNumber: String?
-    
+    @State var imageIcon: String
+    var useSystemImage: Bool = false
+    @State var contactName: String
+    @State var contactInfo: String
     
     var body: some View {
-        VStack {
-            Image(image ?? "rmit_university")
-                .resizable()
-                .scaledToFit()
-                .clipShape(RoundedRectangle(cornerRadius: 25.0))
-                .padding()
-                .frame(width: 300, height: 300)
-                        
-            VStack(alignment: .leading) {
-                HStack(alignment: .top) {
-                    Image(systemName: "person.crop.square.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .foregroundStyle(.purple)
-                        .frame(width: 32)
+        HStack(spacing: 20) {
+            if useSystemImage {
+                Image(systemName: imageIcon)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 30)
+                    .foregroundStyle(Color("text_color_secondary"))
+                    .padding(.leading, 30)
 
-                    VStack(alignment: .leading) {
-                        Text(name ?? "RMIT University")
-                            .font(.system(size: 20, weight: .semibold))
-                        
-                        Text(address ?? "702 Nguyen Van Linh")
-                            .font(.system(size: 14))
-                            .foregroundStyle(Color("caption_color"))      
-                        
-                        HStack {
-                            Image(systemName: "phone.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .foregroundStyle(.red)
-                                .frame(width: 10)
-                            
-                            Text(contactNumber ?? "028 3776 1300")
-                                .font(.system(size: 14))
-                                .foregroundStyle(.red)
-                        }
-                    }
-                }
-                
-                Divider()
-                 .frame(height: 1)
-                 .padding(.horizontal, 10)
-                
-                ExpandableText(text: desc ?? "RMIT University Vietnam is the Vietnamese branch of the Australian research university the Royal Melbourne Institute of Technology, known in Australia as RMIT University. It has three campuses located in Ho Chi Minh City, Hanoi and Danang.")
-                    .font(.system(size: 14))
-                    .lineLimit(4)
-                    .foregroundStyle(Color("text_color"))
+            } else {
+                Image(imageIcon)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 30)
+                    .foregroundStyle(Color("text_color_secondary"))
+                    .padding(.leading, 30)
             }
-            .padding()
-            .background(.white)
-            .clipShape(RoundedRectangle(cornerRadius: 10.0))
+            
+            VStack(alignment: .leading, spacing: 6) {
+                Text(contactName)
+                    .font(.system(size: 18, weight: .bold))
+                    .foregroundStyle(Color("text_color"))
+
+                Text(contactInfo)
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(Color("text_color_secondary"))
+
+            }
             
             Spacer()
         }
-        .frame(width: 300, height: UIScreen.main.bounds.height - 150)
+        .frame(width: UIScreen.main.bounds.width - 50, height: 70)
+        .background(.white)
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .shadow(radius: 10, x: 0, y: 10)
     }
 }
 
 #Preview {
-    ContactCard()
+    ContactCard(imageIcon: "phone.fill", useSystemImage: true, contactName: "Phone number", contactInfo: "(+84) 069 123 456")
 }
