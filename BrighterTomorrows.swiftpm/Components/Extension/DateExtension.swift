@@ -4,7 +4,7 @@
     Last modified: 25/2/2023
     Acknowledgement:
         - The UI designs are inspired from:
-            “Children Learning App,” Drible,
+            “Children Learning App,” Dribbble,
  https://dribbble.com/shots/7265955-Children-Learning-App/attachments/222641?mode=media
     (accessed Feb. 24, 2023).
         - "Apple Documentation", Apple ,https://developer.apple.com/documentation/swiftui/     (accessed Feb. 22, 2023).
@@ -13,20 +13,13 @@
 */
 import SwiftUI
 
-struct ContentView: View {
-    @State private var isSplashViewPresented: Bool = true
-
-    var body: some View {
-        Group {
-            if !isSplashViewPresented {
-                WelcomeView()
-            } else {
-                SplashView(isPresented: $isSplashViewPresented)
-            }
-        }
+extension Date {
+    func formattedAsShortMonthDay() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd (hh:mm)"
+        return formatter.string(from: self)
     }
 }
 
-#Preview {
-    ContentView()
-}
+
+

@@ -1,3 +1,16 @@
+/*  Author: Bui Minh Nhat
+    Email: s3878174@rmit.edu.vn
+    Created  date: 12/2/2023
+    Last modified: 25/2/2023
+    Acknowledgement:
+        - The UI designs are inspired from:
+            “Children Learning App,” Dribbble,
+ https://dribbble.com/shots/7265955-Children-Learning-App/attachments/222641?mode=media
+    (accessed Feb. 24, 2023).
+        - "Apple Documentation", Apple ,https://developer.apple.com/documentation/swiftui/     (accessed Feb. 22, 2023).
+        - "Hacking With Swift", Hacking With Swift, https://www.hackingwithswift.com/
+     (accessed Feb. 22, 2023).
+*/
 import SwiftUI
 
 struct ContactCard: View {
@@ -6,7 +19,7 @@ struct ContactCard: View {
     var address: String?
     var desc: String?
     var contactNumber: String?
-    @State private var isExpanded: Bool = false // State to track card expansion
+    @State private var isExpanded: Bool = false
 
 
     var body: some View {
@@ -52,7 +65,7 @@ struct ContactCard: View {
                 Text(desc!)
                     .font(.system(size: 18))
                     .padding()
-                    .transition(.slide) // Adds a transition effect when the description is shown/hidden
+                    .transition(.slide)
             }
         }
         .background(Color.white)
@@ -60,7 +73,7 @@ struct ContactCard: View {
         .shadow(radius: 5)
         .onTapGesture {
             withAnimation {
-                isExpanded.toggle() // Toggle the expanded state when the card is tapped
+                isExpanded.toggle() 
             }
         }
     }

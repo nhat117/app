@@ -1,3 +1,17 @@
+/*  Author: Bui Minh Nhat
+    Email: s3878174@rmit.edu.vn
+    Created  date: 12/2/2023
+    Last modified: 25/2/2023
+    Acknowledgement:
+        - The UI designs are inspired from:
+            “Children Learning App,” Drible,
+ https://dribbble.com/shots/7265955-Children-Learning-App/attachments/222641?mode=media
+    (accessed Feb. 24, 2023).
+        - "Apple Documentation", Apple ,https://developer.apple.com/documentation/swiftui/     (accessed Feb. 22, 2023).
+        - "Hacking With Swift", Hacking With Swift, https://www.hackingwithswift.com/
+     (accessed Feb. 22, 2023).
+*/
+import Foundation
 struct Scenario {
     let id: Int
     let title: String
@@ -5,6 +19,7 @@ struct Scenario {
     let choices: String
 }
 
+//Scenario data for lesson view
 struct ScenarioData {
     let scenarios1 = [
         Scenario(id: 1,
@@ -24,7 +39,6 @@ struct ScenarioData {
                  description: "Someone Alex knows does something that makes Alex feel uncomfortable.",
                  choices: "Seek a safe adult to share feelings and what happened."),
         
-        // Previous scenarios 4, 5, and 6 as defined earlier...
         Scenario(id: 4,
                  title: "Understanding Personal Space",
                  description: "During a school activity, a classmate gets too close to Alex, making Alex feel uncomfortable.",
