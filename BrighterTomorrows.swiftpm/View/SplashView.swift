@@ -1,3 +1,17 @@
+/*  Author: Bui Minh Nhat
+    Email: s3878174@rmit.edu.vn
+    Created  date: 12/2/2023
+    Last modified: 25/2/2023
+    Acknowledgement:
+        - The UI designs are inspired from:
+            “Children Learning App,” Dribbble,
+ https://dribbble.com/shots/7265955-Children-Learning-App/attachments/222641?mode=media
+    (accessed Feb. 24, 2023).
+        - "Expandable Text", GitHub ,https://github.com/NuPlay/ExpandableText.git     (accessed Feb. 22, 2023).
+        - "SDWebImageSwiftUI", GitHub, https://github.com/SDWebImage/SDWebImageSwiftUI
+            (accessed Feb. 22, 2023).
+*/
+
 import SwiftUI
 import SDWebImageSwiftUI
 

@@ -1,3 +1,16 @@
+/*  Author: Bui Minh Nhat
+    Email: s3878174@rmit.edu.vn
+    Created  date: 12/2/2023
+    Last modified: 25/2/2023
+    Acknowledgement:
+        - The UI designs are inspired from:
+            “Children Learning App,” Drible,
+ https://dribbble.com/shots/7265955-Children-Learning-App/attachments/222641?mode=media
+    (accessed Feb. 24, 2023).
+        - "Apple Documentation", Apple ,https://developer.apple.com/documentation/swiftui/     (accessed Feb. 22, 2023).
+        - "Hacking With Swift", Hacking With Swift, https://www.hackingwithswift.com/
+     (accessed Feb. 22, 2023).
+*/
 import SwiftUI
 
 struct OnboardingView: View {
@@ -12,8 +25,7 @@ struct OnboardingView: View {
     @State private var alertTitle = ""
     @State private var showAlert = false
     @State private var error: CustomError? = nil
-    
-    // Storage
+    //Storage
     @AppStorage("username") var currentUserName: String?
     @AppStorage("age") var currentUserAge: String?
     @AppStorage("login_state") var signedInSession: Bool = false
