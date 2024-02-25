@@ -52,8 +52,6 @@ struct OnboardingView: View {
     }
 }
 
-// MARK: COMPONENTS
-
 extension OnboardingView {
     private var bottomButton: some View {
         Text(onboardingState == 0 ? "Next" :

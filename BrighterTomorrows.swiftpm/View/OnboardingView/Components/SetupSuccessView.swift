@@ -3,8 +3,6 @@ import Vortex
 
 struct SetupSuccessView: View {
     @State private var offset: CGFloat = (-UIScreen.main.bounds.height)
-    
-    // Storage
     @AppStorage("username") var currentUserName: String?
     @AppStorage("age") var currentUserAge: String?
     @AppStorage("login_state") var signedInSession: Bool = false
@@ -13,8 +11,6 @@ struct SetupSuccessView: View {
         NavigationStack {
             ZStack {
                 Color.black.ignoresSafeArea(.all)
-                
-                // Blue circle background
                 Circle()
                     .strokeBorder(Color("secondary"), lineWidth: 50)
                     .background(Circle().fill(Color("primary")))

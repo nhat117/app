@@ -13,7 +13,7 @@ struct ContactCard: View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text(name!).font(.system(size: 23, weight: .bold))
+                    Text(name!).font(.system(size: 18, weight: .bold))
                     
                     HStack {
                         Image(systemName: "phone.fill")
