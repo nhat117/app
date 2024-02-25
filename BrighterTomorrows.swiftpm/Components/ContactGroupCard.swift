@@ -52,7 +52,7 @@ struct CustomContactCard: View {
                         .font(.system(size: 18, weight: .bold))
                         .foregroundStyle(Color("text_color"))
 
-                    Text("[Click here](\(contactInfo))")
+                    Text(contactInfo)
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundStyle(Color("text_color_secondary"))
                 }

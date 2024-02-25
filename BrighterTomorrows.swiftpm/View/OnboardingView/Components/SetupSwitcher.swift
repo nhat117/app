@@ -31,7 +31,3 @@ struct SetupSwitcher: View {
         }
     }
 }
-
- #Preview {
-     SetupSwitcher(loginSession: false, currentUserName: nil, currentUserAge: nil)
- }

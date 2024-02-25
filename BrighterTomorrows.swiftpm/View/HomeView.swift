@@ -44,7 +44,12 @@ struct HomeView: View {
                         
                         Spacer()
                         
+                        NavigationLink(destination: SettingView(), label: {
+                            Image("default_user_avatar")
+                                .resizable()
                                 .aspectRatio(contentMode: .fit)
+                                .frame(width: 70)
+                        })
                     }
                     .padding(.horizontal, 30)
                     
