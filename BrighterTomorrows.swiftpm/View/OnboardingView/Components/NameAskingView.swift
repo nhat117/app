@@ -42,10 +42,10 @@ struct NameAskingView: View {
                     NavigationLink(destination: AgeAskingView(), label: {
                         Text("Next")
                             .foregroundStyle(Color("secondary"))
-                            .font(.system(size: 28))
-                        
+                            .font(.system(size: 35))
+                            .padding()
                         Image(systemName: "arrow.right.circle")
-                            .resizable()
+                            .font(.system(size: 35))
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 24)
                             .foregroundStyle(Color("secondary"))
@@ -53,9 +53,9 @@ struct NameAskingView: View {
                             .transition(.scale)
                     })
                 }
-            } // VStack
+            } 
             .font(.largeTitle)
-        } // NavigationStack
+        }
     }
 }
 

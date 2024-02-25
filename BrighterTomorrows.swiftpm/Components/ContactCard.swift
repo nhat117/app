@@ -1,72 +1,72 @@
 import SwiftUI
-import ExpandableText
 
 struct ContactCard: View {
-    @State var name: String?
-    @State var image: String?
-    @State var address: String?
-    @State var desc: String?
-    @State var contactNumber: String?
-    
-    
+    var name: String?
+    var image: String?
+    var address: String?
+    var desc: String?
+    var contactNumber: String?
+    @State private var isExpanded: Bool = false // State to track card expansion
+
+
     var body: some View {
         VStack {
-            Image(image ?? "rmit_university")
-                .resizable()
-                .scaledToFit()
-                .clipShape(RoundedRectangle(cornerRadius: 25.0))
-                .padding()
-                .frame(width: 300, height: 300)
-                        
-            VStack(alignment: .leading) {
-                HStack(alignment: .top) {
-                    Image(systemName: "person.crop.square.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .foregroundStyle(.purple)
-                        .frame(width: 32)
-
-                    VStack(alignment: .leading) {
-                        Text(name ?? "RMIT University")
-                            .font(.system(size: 20, weight: .semibold))
-                        
-                        Text(address ?? "702 Nguyen Van Linh")
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(name!).font(.system(size: 23, weight: .bold))
+                    
+                    HStack {
+                        Image(systemName: "phone.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(.green)
+                        Text(contactNumber!)
+                            .font(.system(size: 16))
+                    }
+                    HStack {
+                        Image(systemName: "house.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(.gray)
+                        Text(address!)
                             .font(.system(size: 14))
-                            .foregroundStyle(Color("caption_color"))      
-                        
-                        HStack {
-                            Image(systemName: "phone.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .foregroundStyle(.red)
-                                .frame(width: 10)
-                            
-                            Text(contactNumber ?? "028 3776 1300")
-                                .font(.system(size: 14))
-                                .foregroundStyle(.red)
-                        }
                     }
                 }
+                Spacer()
                 
-                Divider()
-                 .frame(height: 1)
-                 .padding(.horizontal, 10)
-                
-                ExpandableText(text: desc ?? "RMIT University Vietnam is the Vietnamese branch of the Australian research university the Royal Melbourne Institute of Technology, known in Australia as RMIT University. It has three campuses located in Ho Chi Minh City, Hanoi and Danang.")
-                    .font(.system(size: 14))
-                    .lineLimit(4)
-                    .foregroundStyle(Color("text_color"))
+                Image(image!)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 80, height: 100)
+                    .foregroundColor(.white)
+                    .padding(10)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                    .padding(3)
             }
             .padding()
-            .background(.white)
-            .clipShape(RoundedRectangle(cornerRadius: 10.0))
-            
-            Spacer()
+
+            if isExpanded {
+                Text(desc!)
+                    .font(.system(size: 18))
+                    .padding()
+                    .transition(.slide) // Adds a transition effect when the description is shown/hidden
+            }
         }
-        .frame(width: 300, height: UIScreen.main.bounds.height - 150)
+        .background(Color.white)
+        .cornerRadius(10)
+        .shadow(radius: 5)
+        .onTapGesture {
+            withAnimation {
+                isExpanded.toggle() // Toggle the expanded state when the card is tapped
+            }
+        }
     }
 }
 
+
 #Preview {
-    ContactCard()
+    ContactCard(name: "RMIT University", image: "rmit_university", address: "701 Nguyen Van Linh", desc: "Lorem ipsum dolor sit amet", contactNumber: "12435235")
 }

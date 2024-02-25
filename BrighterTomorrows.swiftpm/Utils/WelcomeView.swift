@@ -13,6 +13,7 @@ struct WelcomeView: View {
                         showSheet.toggle()
                     } label: {
                         Image(systemName: "info.circle")
+                            .font(.system(size: 30))
                             .padding(.horizontal)
                             .foregroundStyle(Color("primary"))
                     }
@@ -29,15 +30,15 @@ struct WelcomeView: View {
                     .frame(width: 300, height: 300)
                     .transition(.move(edge: .bottom))
                 
-                Text("It's time to stop hiding child abuse")
-                    .font(.title3)
+                Text("It's time to stop children from being sexually abuse")
+                    .font(.system(size: 24))
                     .fontWeight(.heavy)
                     .padding()
                     .multilineTextAlignment(.center)
                     .foregroundStyle(Color("primary"))
                     .transition(.move(edge: .bottom))
 
-                Text("Empathy is key when addressing domestic violence in any form, whether physical or emotional")
+                Text("Empathy is key when addressing sexually abuse in any form, whether physical or emotional")
                     .padding(.horizontal)
                     .multilineTextAlignment(.center)
                     .foregroundStyle(Color("caption_color"))
@@ -50,7 +51,7 @@ struct WelcomeView: View {
             
             NavigationLink(destination: SetupSwitcher(loginSession: false, currentUserName: nil, currentUserAge: nil), label: {
                 Image(systemName: "arrow.right.circle")
-                    .resizable()
+                    .font(.system(size: 40))
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 30)
                     .foregroundStyle(Color("primary"))

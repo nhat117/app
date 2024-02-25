@@ -5,6 +5,8 @@ struct CustomCard: View {
     var backgroundColor: Color
     var imageName: String // Use this if you have an image to display
     var useSystemImage: Bool = true
+    
+    
 
     var body: some View {
         VStack {
@@ -36,10 +38,7 @@ struct CustomCard: View {
         )
     }
 }
-
-// Preview provider for SwiftUI canvas
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview {
         TabView {
             CustomCard(title: "National Child Helpline", backgroundColor: .orange, imageName: "child_helpline_111_vietnam", useSystemImage: false)
             CustomCard(title: "Surprise", backgroundColor: .orange, imageName: "bell")
@@ -49,6 +48,6 @@ struct ContentView_Previews: PreviewProvider {
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
         .frame(height: 520) 
-    }
 }
+
 

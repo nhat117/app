@@ -54,8 +54,7 @@ struct CongratsView: View {
     }
 }
 
-struct CongratsView_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview{
         CongratsView(isPresenting: .constant(true))
-    }
 }
+
