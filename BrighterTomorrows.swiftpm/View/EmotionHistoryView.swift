@@ -30,17 +30,19 @@ struct EmotionHistoryView: View {
         ZStack {
             Color("primary")
                 .ignoresSafeArea()
-            ScrollView {
+           
                 VStack(spacing: 20) {
                     Text("Emotion Diary")
                         .font(.system(size: 30, weight: .bold))
                         .foregroundStyle(CustomColor().header)
-                    ForEach(emotionEntries) { entry in
-                        EmotionHistoryCard(date: entry.date.formattedAsShortMonthDay(), emotionName: entry.emotionName)
+                    ScrollView(showsIndicators: false) {
+                        ForEach(emotionEntries) { entry in
+                            EmotionHistoryCard(date: entry.date.formattedAsShortMonthDay(), emotionName: entry.emotionName)
+                        }
                     }
                 }
                 .padding()
-            }
+            
             .onAppear {
                 loadEmotionHistory()
             }
@@ -60,8 +62,6 @@ struct EmotionHistoryView: View {
     }
 }
 
-struct EmotionalHistoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        EmotionHistoryView()
-    }
+#Preview{
+    EmotionHistoryView()
 }

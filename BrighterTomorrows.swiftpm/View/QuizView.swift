@@ -127,8 +127,7 @@ struct QuizView: View {
     }
 }
 
-struct MathQuizView_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview {
         QuizView(isPresenting: .constant(true), quizData:QuizData())
-    }
+    
 }

@@ -52,13 +52,11 @@ struct OnboardingView: View {
     }
 }
 
-// MARK: COMPONENTS
-
 extension OnboardingView {
     private var bottomButton: some View {
         Text(onboardingState == 0 ? "Next" :
                 onboardingState == 1 ? "Finish" : "Done")
-            .font(.system(size: 20))
+            .font(.system(size: 35))
             .foregroundStyle(Color("primary"))
             .frame(height: 55)
             .frame(maxWidth: .infinity)
@@ -126,6 +124,7 @@ extension OnboardingView {
             .lineSpacing(10.0)
 
         } // NavigationStack
+        .navigationBarBackButtonHidden(true)
 
     }
     
@@ -180,10 +179,9 @@ extension OnboardingView {
             
 
         } // NavigationStack
+        .navigationBarBackButtonHidden(true)
     }
 }
-
-// MARK: FUNCTIONS
 
 extension OnboardingView {
     func signIn() {

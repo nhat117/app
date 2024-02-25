@@ -28,7 +28,7 @@ struct CongratsView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 300)
-                        CustomButton(action: {
+                        CustomButton(title: "YAY, OK !",action: {
                           dismiss()
                             isPresenting = false
                         }).padding()
@@ -54,8 +54,7 @@ struct CongratsView: View {
     }
 }
 
-struct CongratsView_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview{
         CongratsView(isPresenting: .constant(true))
-    }
 }
+

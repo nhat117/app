@@ -33,30 +33,21 @@ struct ContactAndResource: View {
                 .edgesIgnoringSafeArea(.all)
 
             VStack {
-                TabView {
-                    ContactAndResourceCard(
-                        name: contactData.contactResourceData[0].name,
-                        image: contactData.contactResourceData[0].image,
-                        address: contactData.contactResourceData[0].address, 
-                        desc: contactData.contactResourceData[0].desc,
-                        contactNumber: contactData.contactResourceData[0].contactNumber)
-
-                    ContactAndResourceCard(
-                        name: contactData.contactResourceData[1].name,
-                        image: contactData.contactResourceData[1].image,
-                        address: contactData.contactResourceData[1].address,
-                        desc: contactData.contactResourceData[1].desc,
-                        contactNumber: contactData.contactResourceData[1].contactNumber)
-
-                    ContactAndResourceCard(
-                        name: contactData.contactResourceData[2].name,
-                        image: contactData.contactResourceData[2].image,
-                        address: contactData.contactResourceData[2].address,
-                        desc: contactData.contactResourceData[2].desc,
-                        contactNumber: contactData.contactResourceData[2].contactNumber)
-
+                Spacer()
+                Text("Emergency Contact")
+                    .font(.system(size: 30, weight: .bold))
+                    .foregroundStyle(CustomColor().header)
+                ScrollView(showsIndicators: false) {
+                    ForEach(contactData.contactResourceData) {contact in
+                        ContactCard(
+                            name: contact.name,
+                            image: contact.image,
+                            address: contact.address,
+                            desc: contact.desc,
+                            contactNumber: contact.contactNumber)
+                        .padding()
+                    }
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
             }
         }
         .navigationBarBackButtonHidden(true)

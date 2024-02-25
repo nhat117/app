@@ -46,7 +46,10 @@ let package = Package(
                 .product(name: "Vortex", package: "vortex"),
                 .product(name: "ExpandableText", package: "expandabletext")
             ],
-            path: "."
+            path: ".",
+            resources: [
+                .process("Resources")
+            ]
         )
     ]
 )

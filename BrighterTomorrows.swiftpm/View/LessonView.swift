@@ -147,10 +147,7 @@ enum PlaygroundFeature: Int, CustomStringConvertible {
     }
 }
 
-// Your CongratsView code should be here
-
-struct PlaygroundMapView_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview {
         PlaygroundMapView(isPresenting: .constant(true))
-    }
 }
+
