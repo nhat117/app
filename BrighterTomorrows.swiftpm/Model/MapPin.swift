@@ -13,10 +13,8 @@
 */
 import Foundation
 
-struct User : Identifiable {
-    let id = UUID()
-    let name : String
-    let age: Int
-}
-
-
+struct MapPin {
+       var feature: PlaygroundFeatureEnum  // The playground feature the pin represents
+       var xMultiplier: CGFloat  // X position as a multiplier of the view's width
+       var yMultiplier: CGFloat  // Y position as a multiplier of the view's height
+   }

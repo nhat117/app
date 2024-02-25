@@ -11,12 +11,9 @@
         - Incorporated best practices from "Hacking With Swift",
           https://www.hackingwithswift.com/ (accessed Feb. 22, 2023).
 */
+
 import Foundation
 
-struct User : Identifiable {
-    let id = UUID()
-    let name : String
-    let age: Int
+enum ThemeEnum {
+    static let darkMode = false  // Default theme setting for the application
 }
-
-

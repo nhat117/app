@@ -1,29 +1,33 @@
-/*  Author: Bui Minh Nhat
+/*
+    Author: Bui Minh Nhat
     Email: s3878174@rmit.edu.vn
-    Created  date: 12/2/2023
+    Created date: 12/2/2023
     Last modified: 25/2/2023
-    Acknowledgement:
-        - The UI designs are inspired from:
-            “Children Learning App,” Drible,
- https://dribbble.com/shots/7265955-Children-Learning-App/attachments/222641?mode=media
-    (accessed Feb. 24, 2023).
-        - "Apple Documentation", Apple ,https://developer.apple.com/documentation/swiftui/     (accessed Feb. 22, 2023).
-        - "Hacking With Swift", Hacking With Swift, https://www.hackingwithswift.com/
-     (accessed Feb. 22, 2023).
+    Acknowledgements:
+        - Inspired by “Children Learning App” on Dribbble,
+          https://dribbble.com/shots/7265955-Children-Learning-App/attachments/222641?mode=media (accessed Feb. 24, 2023).
+        - Utilized "Apple Documentation" for SwiftUI guidance,
+          https://developer.apple.com/documentation/swiftui/ (accessed Feb. 22, 2023).
+        - Incorporated best practices from "Hacking With Swift",
+          https://www.hackingwithswift.com/ (accessed Feb. 22, 2023).
 */
 import SwiftUI
 
 struct AgeAskingView: View {
-    @State private var age: String = ""
-    @State private var isTextClicked: Bool = false
-    
+    @State private var age: String = ""  // State variable to store the user's age input
+    @State private var isTextClicked: Bool = false  // State variable to toggle the text field's active state
+
     var body: some View {
         NavigationStack {
             VStack {
                 Spacer()
+
+                // Prompt text
                 Text("How about your ")
+
+                // Conditional TextField or Button based on user interaction
                 if isTextClicked {
-                    TextField("age", text: $age)
+                    TextField("age", text: $age)  // Active text field for age input
                         .frame(width: 150)
                         .foregroundStyle(Color("primary"))
                         .fontWeight(.bold)
@@ -35,23 +39,22 @@ struct AgeAskingView: View {
                         )
                         .offset(x: -35)
                         .autocorrectionDisabled(true)
-                        .textContentType(.name)
-                        .keyboardType(.numberPad)
-                    
+                        .keyboardType(.numberPad)  // Ensures numeric input
+
                 } else {
                     Button(role: .none) {
-                        withAnimation {
-                            isTextClicked.toggle()
-                        }
+                        withAnimation { isTextClicked.toggle() }  // Animates the transition to the text field
                     } label: {
-                        Text("age ?")
+                        Text("age ?")  // Placeholder button for age input
                             .foregroundColor(Color("primary"))
                             .bold()
                     }
                     .offset(x: -78)
                 }
-                
+
                 Spacer()
+
+                // Navigation link to the next view, visible only when the age input is not empty
                 if (!age.isEmpty) {
                     NavigationLink(destination: SetupSuccessView(), label: {
                         Text("Next")
@@ -64,16 +67,16 @@ struct AgeAskingView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 30)
                             .foregroundStyle(Color("primary"))
-                            .opacity(age.isEmpty ? 0.4 : 1.0)
+                            .opacity(age.isEmpty ? 0.4 : 1.0)  // Adjusts opacity based on age input
                             .transition(.scale)
                     })
                 }
-            } // VStack
+            }
             .font(.largeTitle)
-        } // NavigationStack
+        }
     }
 }
 
-#Preview {
-    AgeAskingView()
-}
+ #Preview {
+     AgeAskingView()
+ }
