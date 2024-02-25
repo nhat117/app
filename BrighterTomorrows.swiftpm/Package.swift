@@ -35,14 +35,16 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/SDWebImage/SDWebImageSwiftUI", "2.2.6"..<"3.0.0"),
-        .package(url: "https://github.com/twostraws/Vortex", "1.0.0"..<"2.0.0")
+        .package(url: "https://github.com/twostraws/Vortex", "1.0.0"..<"2.0.0"),
+        .package(url: "https://github.com/NuPlay/ExpandableText.git", "1.2.0"..<"2.0.0")
     ],
     targets: [
         .executableTarget(
             name: "AppModule",
             dependencies: [
                 .product(name: "SDWebImageSwiftUI", package: "sdwebimageswiftui"),
-                .product(name: "Vortex", package: "vortex")
+                .product(name: "Vortex", package: "vortex"),
+                .product(name: "ExpandableText", package: "expandabletext")
             ],
             path: ".",
             resources: [
