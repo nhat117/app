@@ -19,18 +19,12 @@ struct SetupSwitcher: View {
     @AppStorage("username") var currentUserName: String?  // Optional storage for the user's name
     @AppStorage("age") var currentUserAge: String?  // Optional storage for the user's age
     
-    init(loginSession: Bool, currentUserName: String? = nil, currentUserAge: String? = nil) {
-        self.loginSession = loginSession
-        self.currentUserName = currentUserName
-        self.currentUserAge = currentUserAge
-    }
-    
     var body: some View {
         ZStack {
             Color.white.edgesIgnoringSafeArea(.all)  // Sets the background color to white for the entire view
             
             if loginSession {
-                SetupSuccessView()  // Displays this view if the user is logged in
+                HomeView()
             } else {
                 OnboardingView()  // Otherwise, displays the onboarding view
             }

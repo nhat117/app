@@ -44,13 +44,7 @@ struct HomeView: View {
                         
                         Spacer()
                         
-                        // User avatar or profile picture
-                        Image("tri-avatar")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .clipShape(Circle())
-                            .frame(width: 60)
-                            .shadow(radius: 6)
+                                .aspectRatio(contentMode: .fit)
                     }
                     .padding(.horizontal, 30)
                     

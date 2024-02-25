@@ -47,7 +47,7 @@ struct SetupSuccessView: View {
                     VStack(spacing: 20) {
                         // Two circle images
                         HStack(spacing: 4) {
-                            Image("tri-avatar")
+                            Image("default_user_avatar")
                                 .resizable()
                                 .scaledToFit()
                                 .clipShape(Circle())
@@ -66,11 +66,11 @@ struct SetupSuccessView: View {
                         // Greeting message
                         VStack {
                             Text("Happy journey with")
-                                .font(.system(size: 14, weight: .light))
+                                .font(.system(size: 25, weight: .light))
                                 .foregroundStyle(.white)
                             
                             Text("Brighter Tomorrow")
-                                .font(.headline)
+                                .font(.system(size: 30, weight: .bold))
                                 .foregroundStyle(.white)
                         }
                     }

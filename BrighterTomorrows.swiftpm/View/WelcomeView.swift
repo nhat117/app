@@ -66,8 +66,7 @@ struct WelcomeView: View {
             
             Spacer(minLength: 130)
             
-            // Navigation button to proceed in the app
-            NavigationLink(destination: SetupSwitcher(loginSession: false, currentUserName: nil, currentUserAge: nil), label: {
+            NavigationLink(destination: SetupSwitcher(), label: {
                 Image(systemName: "arrow.right.circle")
                     .font(.system(size: 40))
                     .aspectRatio(contentMode: .fit)
@@ -82,6 +81,7 @@ struct WelcomeView: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
