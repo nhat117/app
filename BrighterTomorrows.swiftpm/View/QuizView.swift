@@ -1,35 +1,35 @@
-/*  Author: Bui Minh Nhat
+/*
+    Author: Bui Minh Nhat
     Email: s3878174@rmit.edu.vn
-    Created  date: 12/2/2023
+    Created date: 12/2/2023
     Last modified: 25/2/2023
-    Acknowledgement:
-        - The UI designs are inspired from:
-            “Children Learning App,” Dribbble,
- https://dribbble.com/shots/7265955-Children-Learning-App/attachments/222641?mode=media
-    (accessed Feb. 24, 2023).
-        - "Apple Documentation", Apple ,https://developer.apple.com/documentation/swiftui/     (accessed Feb. 22, 2023).
-        - "Hacking With Swift", Hacking With Swift, https://www.hackingwithswift.com/
-     (accessed Feb. 22, 2023).
+    Acknowledgements:
+        - Inspired by “Children Learning App” from Dribbble,
+          https://dribbble.com/shots/7265955-Children-Learning-App/attachments/222641?mode=media (accessed Feb. 24, 2023).
+        - Utilized "Apple Documentation" for SwiftUI guidance,
+          https://developer.apple.com/documentation/swiftui/ (accessed Feb. 22, 2023).
+        - Incorporated best practices from "Hacking With Swift",
+          https://www.hackingwithswift.com/ (accessed Feb. 22, 2023).
 */
-
 import SwiftUI
 
 struct QuizView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
-    @Binding var isPresenting: Bool
-    var quizData: QuizData
-    @State private var currentQuestionIndex = 0
-    @State private var selectedOptionID: Int?
-    @State private var isAnswered = false
-    @State private var showCongratsView = false
-    let buttonLabel = ["A", "B", "C","D"]
-    let backgroundColor = CustomColor().backgroundColor
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = ThemeEnum.darkMode
+    @Binding var isPresenting: Bool  // Controls the presentation of the QuizView
+    var quizData: QuizData  // Contains the questions and answers for the quiz
+    @State private var currentQuestionIndex = 0  // Tracks the current question being displayed
+    @State private var selectedOptionID: Int?  // Tracks the user's selected answer
+    @State private var isAnswered = false  // Indicates whether the current question has been answered
+    @State private var showCongratsView = false  // Controls the presentation of the congratulatory view upon quiz completion
+    let buttonLabel = ["A", "B", "C", "D"]  // Labels for answer options
+    let backgroundColor = CustomColor().backgroundColor  // Background color for the view
 
+    // Back button UI component
     var backButton: some View {
         Button(action: {
             withAnimation() {
-                presentationMode.wrappedValue.dismiss()
+                presentationMode.wrappedValue.dismiss()  // Dismisses the QuizView
             }
         }) {
             Image(systemName: "arrow.left")
@@ -55,9 +55,12 @@ struct QuizView: View {
                 VStack(spacing: 20) {
                     Color.clear.frame(height: 20)
                     
+                    // Displays the current question number
                     Text("Question \(currentQuestionIndex + 1)")
-                        .font(.system(size: 35,weight: .bold, design: .rounded))
+                        .font(.system(size: 35, weight: .bold, design: .rounded))
                         .foregroundStyle(CustomColor().header)
+                    
+                    // Question text display
                     ZStack {
                         RoundedRectangle(cornerRadius: 25)
                             .fill(Color.white)
@@ -65,33 +68,32 @@ struct QuizView: View {
                             .shadow(radius: 5)
                         
                         Text(quizData.questionsBank2.questions[currentQuestionIndex].text)
-                            .font(.system(size: 23,weight: .bold, design: .rounded))
+                            .font(.system(size: 23, weight: .bold, design: .rounded))
                             .bold()
                     }
                     .padding()
                     
-
+                    // Option buttons for the current question
                     VStack(spacing: 20) {
                         ForEach(Array(zip(buttonLabel.indices, quizData.questionsBank2.questions[currentQuestionIndex].options)), id: \.0) { index, option in
                             CustomButtonQuiz(
                                 letter: buttonLabel[index],
                                 number: option.text,
                                 action: {
-                                    answerSelected(option.id)
-                                    
+                                    answerSelected(option.id)  // Handles answer selection
                                 },
                                 gradientColors: [Color.purple, Color.blue],
-                                borderColor: getBorderColor(forOptionID: option.id, correctOptionID: quizData.questionsBank2.questions[currentQuestionIndex].correctOptionID)
+                                borderColor: getBorderColor(forOptionID: option.id, correctOptionID: quizData.questionsBank2.questions[currentQuestionIndex].correctOptionID)  // Determines border color based on answer correctness
                             )
                         }
                     }
                     .padding()
                     
+                    // Navigation to CongratsView upon completing all questions
                     NavigationLink(destination: CongratsView(isPresenting: $isPresenting), isActive: $showCongratsView) {
-                           EmptyView()
-                       }
+                        EmptyView()
+                    }
                 }
-                
             }
             .navigationBarBackButtonHidden(true)
             .toolbar {
@@ -103,45 +105,44 @@ struct QuizView: View {
             }
         }
     }
-    func answerSelected(_ optionID: Int) {
-            selectedOptionID = optionID
-            isAnswered = true
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                if currentQuestionIndex < quizData.questionsBank2.questions.count - 1 {
-                    currentQuestionIndex += 1
-                    selectedOptionID = nil
-                    isAnswered = false
-                } else {
-                  
-                    showCongratsView = true
 
-                }
+    // Handles the logic when an answer is selected
+    func answerSelected(_ optionID: Int) {
+        selectedOptionID = optionID
+        isAnswered = true
+        
+        // Advances to the next question or concludes the quiz after a delay
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            if currentQuestionIndex < quizData.questionsBank2.questions.count - 1 {
+                currentQuestionIndex += 1
+                selectedOptionID = nil
+                isAnswered = false
+            } else {
+                showCongratsView = true  // Triggers the transition to the congratulatory view
             }
         }
-    func getBorderColor(forOptionID optionID: Int, correctOptionID: Int) -> Color {
+    }
 
+    // Determines the border color of answer options based on their correctness and selection status
+    func getBorderColor(forOptionID optionID: Int, correctOptionID: Int) -> Color {
         guard let selectedOptionID = selectedOptionID else {
             return Color.clear
         }
 
-        
         if selectedOptionID == correctOptionID {
             return optionID == selectedOptionID ? Color.green : Color.clear
         } else {
-            
             if optionID == selectedOptionID {
                 return Color.red
             } else if optionID == correctOptionID {
                 return Color(red: 124/255, green: 226/255, blue: 139/255)
             } else {
-                return Color.clear 
+                return Color.clear
             }
         }
     }
 }
 
-#Preview {
-        QuizView(isPresenting: .constant(true), quizData:QuizData())
-    
-}
+ #Preview {
+     QuizView(isPresenting: .constant(true), quizData: QuizData())
+ }

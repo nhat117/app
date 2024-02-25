@@ -11,12 +11,15 @@
         - Incorporated best practices from "Hacking With Swift",
           https://www.hackingwithswift.com/ (accessed Feb. 22, 2023).
 */
-import Foundation
+import SwiftUI
 
-struct User : Identifiable {
-    let id = UUID()
-    let name : String
-    let age: Int
+extension Date {
+    func formattedAsShortMonthDay() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd (hh:mm)"
+        return formatter.string(from: self)
+    }
 }
+
 
 

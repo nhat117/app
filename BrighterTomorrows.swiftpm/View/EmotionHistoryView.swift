@@ -1,28 +1,29 @@
-/*  Author: Bui Minh Nhat
+/*
+    Author: Bui Minh Nhat
     Email: s3878174@rmit.edu.vn
-    Created  date: 12/2/2023
+    Created date: 12/2/2023
     Last modified: 25/2/2023
-    Acknowledgement:
-        - The UI designs are inspired from:
-            “Children Learning App,” Drible,
- https://dribbble.com/shots/7265955-Children-Learning-App/attachments/222641?mode=media
-    (accessed Feb. 24, 2023).
-        - "Apple Documentation", Apple ,https://developer.apple.com/documentation/swiftui/     (accessed Feb. 22, 2023).
-        - "Hacking With Swift", Hacking With Swift, https://www.hackingwithswift.com/
-     (accessed Feb. 22, 2023).
+    Acknowledgements:
+        - Inspired by “Children Learning App” on Dribbble,
+          https://dribbble.com/shots/7265955-Children-Learning-App/attachments/222641?mode=media (accessed Feb. 24, 2023).
+        - Utilized "Apple Documentation" for SwiftUI guidance,
+          https://developer.apple.com/documentation/swiftui/ (accessed Feb. 22, 2023).
+        - Incorporated best practices from "Hacking With Swift",
+          https://www.hackingwithswift.com/ (accessed Feb. 22, 2023).
 */
+
 import SwiftUI
 
 struct EmotionHistoryView: View {
-    @State private var emotionEntries: [EmotionEntry] = []
+    @State private var emotionEntries: [EmotionEntry] = []  // Holds the list of emotion entries
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    //Storage
-    @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = ThemeEnum.darkMode  // User's theme preference
     
+    // Back button for navigation
     var backButton: some View {
         Button(action: {
             withAnimation() {
-                presentationMode.wrappedValue.dismiss()
+                presentationMode.wrappedValue.dismiss()  // Dismisses the current view
             }
         }) {
             Image(systemName: "arrow.left")
@@ -37,28 +38,30 @@ struct EmotionHistoryView: View {
                 )
                 .shadow(radius: 3)
         }
-        .frame(width: 44, height: 44) 
+        .frame(width: 44, height: 44)
         .padding(.vertical)
     }
+
     var body: some View {
         ZStack {
-            Color("primary")
+            Color("primary")  // Background color for the view
                 .ignoresSafeArea()
            
-                VStack(spacing: 20) {
-                    Text("Emotion Diary")
-                        .font(.system(size: 30, weight: .bold))
-                        .foregroundStyle(CustomColor().header)
-                    ScrollView(showsIndicators: false) {
-                        ForEach(emotionEntries) { entry in
-                            EmotionHistoryCard(date: entry.date.formattedAsShortMonthDay(), emotionName: entry.emotionName)
-                        }
+            VStack(spacing: 20) {
+                Text("Emotion Diary")
+                    .font(.system(size: 30, weight: .bold))
+                    .foregroundStyle(CustomColor().header)  // Custom header style
+
+                // Scrollable list of emotion history cards
+                ScrollView(showsIndicators: false) {
+                    ForEach(emotionEntries) { entry in
+                        EmotionHistoryCard(date: entry.date.formattedAsShortMonthDay(), emotionName: entry.emotionName)
                     }
                 }
-                .padding()
-            
+            }
+            .padding()
             .onAppear {
-                loadEmotionHistory()
+                loadEmotionHistory()  // Loads the emotion history when the view appears
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -71,11 +74,12 @@ struct EmotionHistoryView: View {
         }
     }
 
+    // Loads the emotion history from the EmotionHistoryManager
     private func loadEmotionHistory() {
         emotionEntries = EmotionHistoryManager.shared.loadEmotionHistory()
     }
 }
 
-#Preview{
-    EmotionHistoryView()
-}
+ #Preview{
+     EmotionHistoryView()
+ }
