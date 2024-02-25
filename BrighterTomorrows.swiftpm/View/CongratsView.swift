@@ -27,7 +27,7 @@ struct CongratsView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 300)
-                        CustomButton(action: {
+                        CustomButton(title: "YAY, OK !",action: {
                           dismiss()
                             isPresenting = false
                         }).padding()

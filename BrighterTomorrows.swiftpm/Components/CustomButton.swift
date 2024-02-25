@@ -1,10 +1,11 @@
 import SwiftUI
 
 struct CustomButton: View {
+    var title : String
     var action: () -> Void
     var body: some View {
         Button(action: action) {
-            Text("YAY, OK!")
+            Text(title)
                 .font(.system(size: 24, weight: .bold)) // Customize the font size and weight as needed
                 .foregroundColor(.white) // Set the text color to white
                 .frame(minWidth: 0, maxWidth: .infinity) // Make the button expand to the width of its container
@@ -20,7 +21,7 @@ struct CustomButton: View {
 // Preview provider for SwiftUI previews in Xcode
 struct CustomButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomButton(action: {})
+        CustomButton(title: "YAY, OK!", action: {})
             .padding() // Add padding around the button
     }
 }

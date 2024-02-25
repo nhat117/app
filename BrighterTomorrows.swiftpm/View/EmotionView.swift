@@ -5,6 +5,8 @@ struct EmotionView: View {
     @AppStorage("isDarkMode") private var isDarkMode: Bool = Theme.darkMode
     @State private var sliderValue: Double = 50
     @State private var selectedEmotion: String = "Happiness"
+    @State private var selectedImage: UIImage?
+    @State private var isPhotoPickerPresented = false
     var backButton: some View {
         Button(action: {
             withAnimation() {
@@ -54,24 +56,20 @@ struct EmotionView: View {
                 Color.clear.frame(height: 40)
                 Text("How do you feel today ?").font(.system(size: 30, weight: .bold))
                 Spacer()
-                TabView {
-                    CustomCard(title: "Surprise", backgroundColor: .orange, imageName: "bell").onTapGesture {
-                        selectedEmotion = "Surprise"
-                    }
-                    CustomCard(title: "Happiness", backgroundColor: .yellow, imageName: "sun.max").onTapGesture {
-                        selectedEmotion = "Happiness"
-                    }
-                    CustomCard(title: "Sadness", backgroundColor: .blue, imageName: "cloud.rain").onTapGesture {
-                        selectedEmotion = "Sadness"
-                    }
-                    CustomCard(title: "Love", backgroundColor: .pink, imageName: "heart").onTapGesture {
-                        selectedEmotion = "Love"
-                    }
+                TabView(selection: $selectedEmotion) {
+                    CustomCard(title: "Surprise", backgroundColor: .orange, imageName: "bell")
+                        .tag("Surprise") // Use .tag to identify this view in the selection
+                    CustomCard(title: "Happiness", backgroundColor: .yellow, imageName: "sun.max")
+                        .tag("Happiness")
+                    CustomCard(title: "Sadness", backgroundColor: .blue, imageName: "cloud.rain")
+                        .tag("Sadness")
+                    CustomCard(title: "Neutral", backgroundColor: .gray, imageName: "cloud")
+                        .tag("Neutral")
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                 .frame(height: 520)
-                
                 Spacer()
+
             }
         }
         .navigationBarBackButtonHidden(true)

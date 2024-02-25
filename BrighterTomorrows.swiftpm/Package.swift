@@ -44,7 +44,10 @@ let package = Package(
                 .product(name: "SDWebImageSwiftUI", package: "sdwebimageswiftui"),
                 .product(name: "Vortex", package: "vortex")
             ],
-            path: "."
+            path: ".",
+            resources: [
+                .process("Resources")
+            ]
         )
     ]
 )
