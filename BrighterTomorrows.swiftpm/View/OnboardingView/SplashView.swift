@@ -22,7 +22,7 @@ struct SplashView: View {
     @State private var scale = CGSize(width: 0.8, height: 0.8)  // Initial scale for the logo animation
     @State private var imageOpacity = 1.0  // Controls the opacity of the colored app logo
     @State private var systemImageOpacity = 0.0  // Controls the opacity of the white app logo
-    @StateObject var audioPlayerViewModel = SoundManager(with: SoundManager.Sound.crystal)  // Manages sound playback
+  
 
     var body: some View {
         ZStack {
@@ -54,7 +54,7 @@ struct SplashView: View {
             withAnimation(.easeInOut(duration: 1.5)) {
                 scale = CGSize(width: 1, height: 1)  // Scale up logos to their full size
                 systemImageOpacity = 1  // Fade in the white logo
-                audioPlayerViewModel.playSound()  // Play opening sound effect
+                
             }
             
             // Flicker effect for the colored app logo

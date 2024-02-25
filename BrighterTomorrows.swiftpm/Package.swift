@@ -19,7 +19,7 @@ let package = Package(
             bundleIdentifier: "com.rmit.BrighterTomorrows",
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .running),
+            appIcon: .asset("AppIcon"),
             accentColor: .presetColor(.brown),
             supportedDeviceFamilies: [
                 .pad,

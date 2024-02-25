@@ -63,7 +63,7 @@ struct EmotionView: View {
     private var emotionTabView: some View {
         TabView(selection: $selectedEmotion) {
             ForEach(emotions, id: \.0) { emotion in
-                CustomCard(title: emotion.0, backgroundColor: emotion.2, imageName: emotion.1)
+                CustomEmotionCard(title: emotion.0, backgroundColor: emotion.2, imageName: emotion.1)
                     .tag(emotion.0)
             }
         }

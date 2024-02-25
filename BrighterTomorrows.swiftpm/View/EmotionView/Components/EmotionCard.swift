@@ -13,7 +13,7 @@
 */
 import SwiftUI
 
-struct CustomCard: View {
+struct CustomEmotionCard: View {
     var title: String
     var backgroundColor: Color
     var imageName: String
@@ -51,11 +51,11 @@ struct CustomCard: View {
 }
 #Preview {
         TabView {
-            CustomCard(title: "National Child Helpline", backgroundColor: .orange, imageName: "child_helpline_111_vietnam", useSystemImage: false)
-            CustomCard(title: "Surprise", backgroundColor: .orange, imageName: "bell")
-            CustomCard(title: "Happiness", backgroundColor: .yellow, imageName: "sun.max")
-            CustomCard(title: "Sadness", backgroundColor: .blue, imageName: "cloud.rain")
-            CustomCard(title: "Love", backgroundColor: .pink, imageName: "heart")
+            CustomEmotionCard(title: "National Child Helpline", backgroundColor: .orange, imageName: "child_helpline_111_vietnam", useSystemImage: false)
+            CustomEmotionCard(title: "Surprise", backgroundColor: .orange, imageName: "bell")
+            CustomEmotionCard(title: "Happiness", backgroundColor: .yellow, imageName: "sun.max")
+            CustomEmotionCard(title: "Sadness", backgroundColor: .blue, imageName: "cloud.rain")
+            CustomEmotionCard(title: "Love", backgroundColor: .pink, imageName: "heart")
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
         .frame(height: 520) 
