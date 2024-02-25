@@ -18,25 +18,15 @@ struct SetupSwitcher: View {
     @AppStorage("username") var currentUserName: String?
     @AppStorage("age") var currentUserAge: String?
     
-    init(loginSession: Bool, currentUserName: String? = nil, currentUserAge: String? = nil) {
-        self.loginSession = loginSession
-        self.currentUserName = currentUserName
-        self.currentUserAge = currentUserAge
-    }
-    
     var body: some View {
         ZStack {
             Color.white
             
             if loginSession {
-                SetupSuccessView()
+                HomeView()
             } else {
                 OnboardingView()
             }
         }
     }
-}
-
-#Preview {
-    SetupSwitcher(loginSession: false, currentUserName: nil, currentUserAge: nil)
 }

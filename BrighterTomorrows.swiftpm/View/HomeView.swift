@@ -46,12 +46,14 @@ struct HomeView: View {
                         
                         Spacer()
                         
-                        Image("tri-avatar")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .clipShape(Circle())
-                            .frame(width: 60)
-                            .shadow(radius: 6)
+                        NavigationLink(destination: SettingView()) {
+                            Image("default_user_avatar")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(Circle())
+                                .frame(width: 60)
+                                .shadow(radius: 6)
+                        }
                     }
                     .padding(.horizontal, 30)
                     

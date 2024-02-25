@@ -220,7 +220,7 @@ extension OnboardingView {
             }
         
         case 1:
-            if Int(age)! < 10 {
+            if Int(age)! < 6 {
                 showAlert.toggle()
                 error = .ageTooYoung
                 return
