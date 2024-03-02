@@ -1,4 +1,4 @@
-# Brighter Tomorrow
+# App Tomorrow
 
 App is an innovative educational application developed for the iPhone 15 Pro. Developed with SwiftUI in Xcode Playgrounds, this app equips children with crucial knowledge and resources about sexual abuse prevention. Through interactive content and features, it provides a secure and engaging learning environment for children to understand and express their emotions effectively.
 
